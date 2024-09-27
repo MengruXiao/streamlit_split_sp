@@ -57,7 +57,7 @@ st.title('分割sp或view小工具')
 function = st.selectbox('选择功能', ['SP分割', 'view分割'])
 
 # 允许用户上传一个 TXT 文件
-uploaded_file = st.file_uploader('上传一个包含多个存储过程的 TXT 文件', type=['txt'])
+uploaded_file = st.file_uploader('上传一个包含多个存储过程的 TXT 或 SQL 文件', type=['txt','sql'])
 
 schema = st.text_input('schema名', max_chars=100)
 
