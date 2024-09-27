@@ -54,17 +54,23 @@ def create_zip_file(temp_dir):
 st.title('存储过程处理工具')
 
 # 选择功能
-function = st.selectbox('选择功能', ['按 CREATE OR REPLACE PROCEDURE 分割', '其他功能'])
+function = st.selectbox('选择功能', ['SP分割', 'view分割'])
 
 # 允许用户上传一个 TXT 文件
 uploaded_file = st.file_uploader('上传一个包含多个存储过程的 TXT 文件', type=['txt'])
 
 if st.button('处理并导出'):
+
+
+    schema = st.text_input('schema名', max_chars=100)
+
+    # 根据用户输入进行操作
+    st.write('schema名是', schema)
     if uploaded_file:
         # 读取文件内容
         content = uploaded_file.read().decode('utf-8')
 
-        if function == '按 CREATE OR REPLACE PROCEDURE 分割':
+        if function == 'SP分割':
             # 处理文件内容
             procedures = process_file(content)
 
@@ -76,7 +82,7 @@ if st.button('处理并导出'):
                 for proc in procedures:
                     sp_name = extract_procedure_name(proc)
                     if sp_name:
-                        filename = f"{sp_name}.sql"
+                        filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
                         st.write(f"Created file: {filename}")
                     else:
@@ -93,7 +99,7 @@ if st.button('处理并导出'):
                     file_name="procedures.zip",
                     mime="application/zip"
                 )
-        elif function == '其他功能':
+        elif function == 'view分割':
             st.write("其他功能暂未实现")
     else:
         st.warning('请先上传一个 TXT 文件')
