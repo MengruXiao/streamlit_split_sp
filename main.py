@@ -51,7 +51,7 @@ def create_zip_file(temp_dir):
     return zip_buffer
 
 
-st.title('存储过程处理工具')
+st.title('分割sp或view小工具')
 
 # 选择功能
 function = st.selectbox('选择功能', ['SP分割', 'view分割'])
@@ -59,13 +59,14 @@ function = st.selectbox('选择功能', ['SP分割', 'view分割'])
 # 允许用户上传一个 TXT 文件
 uploaded_file = st.file_uploader('上传一个包含多个存储过程的 TXT 文件', type=['txt'])
 
+schema = st.text_input('schema名', max_chars=100)
+
+# 根据用户输入进行操作
+st.write('schema名是', schema)
+
 if st.button('处理并导出'):
 
 
-    schema = st.text_input('schema名', max_chars=100)
-
-    # 根据用户输入进行操作
-    st.write('schema名是', schema)
     if uploaded_file:
         # 读取文件内容
         content = uploaded_file.read().decode('utf-8')
