@@ -17,14 +17,13 @@ def extract_procedure_name(sql):
 
 
 def extract_view_name(sql):
-    """从 SQL 语句中提取存储过程的名称"""
-    match = re.search(r'CREATE OR REPLACE VIEW\s+(\w+\.\w+)\(', sql, re.IGNORECASE)
+    """从 SQL 语句中提取视图的名称"""
+    match = re.search(r'CREATE OR REPLACE VIEW\s+(\w+\.\w+)\s*', sql, re.IGNORECASE)
     if match:
         full_name = match.group(1)
-        _, sp_name = full_name.split('.')
-        return sp_name
+        _, view_name = full_name.split('.')
+        return view_name
     return None
-
 
 def process_file(content):
     """处理文件内容，按 CREATE OR REPLACE PROCEDURE 分割"""
@@ -44,20 +43,20 @@ def process_file(content):
 
 
 def process_file_view(content):
-    """处理文件内容，按 CREATE OR REPLACE PROCEDURE 分割"""
-    # 按 "CREATE OR REPLACE PROCEDURE " 分割文本
+    """处理文件内容，按 CREATE OR REPLACE VIEW 分割"""
+    # 按 "CREATE OR REPLACE VIEW " 分割文本
     parts = content.split('CREATE OR REPLACE VIEW ')
 
     # 去除空字符串
-    procedures = [part.strip() for part in parts if part.strip()]
+    views = [part.strip() for part in parts if part.strip()]
 
-    # 合并分割后的部分，确保每个存储过程的 SQL 语句是完整的
-    combined_procedures = []
-    for proc in procedures:
-        if proc:
-            combined_procedures.append(f'CREATE OR REPLACE VIEW {proc}')
+    # 合并分割后的部分，确保每个视图的 SQL 语句是完整的
+    combined_views = []
+    for view in views:
+        if view:
+            combined_views.append(f'CREATE OR REPLACE VIEW {view}')
 
-    return combined_procedures
+    return combined_views
 
 
 
