@@ -16,6 +16,16 @@ def extract_procedure_name(sql):
     return None
 
 
+def extract_view_name(sql):
+    """从 SQL 语句中提取存储过程的名称"""
+    match = re.search(r'CREATE OR REPLACE VIEW\s+(\w+\.\w+)\(', sql, re.IGNORECASE)
+    if match:
+        full_name = match.group(1)
+        _, sp_name = full_name.split('.')
+        return sp_name
+    return None
+
+
 def process_file(content):
     """处理文件内容，按 CREATE OR REPLACE PROCEDURE 分割"""
     # 按 "CREATE OR REPLACE PROCEDURE " 分割文本
@@ -129,7 +139,7 @@ if st.button('处理并导出'):
 
                 # 生成命名规则为 sp名.sql 的文件
                 for proc in procedures:
-                    sp_name = extract_procedure_name(proc)
+                    sp_name = extract_view_name(proc)
                     if sp_name:
                         filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
