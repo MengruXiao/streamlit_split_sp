@@ -145,7 +145,7 @@ if st.button('处理并导出'):
                         create_temp_file(temp_dir, filename, proc)
                         st.write(f"Created file: {filename}")
                     else:
-                        st.write("Failed to extract procedure name from the following content:")
+                        st.write("Failed to extract view name from the following content:")
                         st.write(proc)
 
                 # 创建 ZIP 文件
