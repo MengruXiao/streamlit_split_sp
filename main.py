@@ -17,6 +17,15 @@ def extract_procedure_name(sql):
     return None
 
 
+def extract_view_name(sql):
+    """从 SQL 语句中提取视图的名称"""
+    match = re.search(r'CREATE OR REPLACE VIEW\s+(\w+\.\w+)\s*', sql, re.IGNORECASE)
+    if match:
+        full_name = match.group(1)
+        _, view_name = full_name.split('.')
+        return view_name
+    return None
+
 def extract_table_name(sql):
     """从 SQL 语句中提取表的名称"""
     match = re.search(r'CREATE TABLE IF NOT EXISTS\s+(\w+\.\w+)\s*', sql, re.IGNORECASE)
@@ -168,13 +177,13 @@ if st.button('处理并导出'):
                 # 生成命名规则为 sp名.sql 的文件
                 filename_list=[]
                 for proc in procedures:
-                    sp_name = extract_procedure_name(proc)
+                    sp_name = extract_view_name(proc)
                     if sp_name:
                         filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
                         filename_list.append(filename)
                     else:
-                        st.write("Failed to extract procedure name from the following content:")
+                        st.write("Failed to extract view name from the following content:")
                         st.write(proc)
 
                 df = pd.DataFrame(filename_list, columns=['view_list'])
