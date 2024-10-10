@@ -4,6 +4,7 @@ import zipfile
 import io
 import tempfile
 from pathlib import Path
+import pandas as pd
 
 
 def extract_procedure_name(sql):
@@ -189,16 +190,20 @@ if st.button('处理并导出'):
                 temp_dir = Path(temp_dir_str)
 
                 # 生成命名规则为 sp名.sql 的文件
+                filename_list=[]
                 for proc in procedures:
                     sp_name = extract_table_name(proc)
                     if sp_name:
                         filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
-                        st.write(f"Created file: {filename}")
+                        filename_list.append(filename)
+                        df = pd.DataFrame(filename_list, columns=['table_list'])
+                        st.dataframe(df)
+                        
                     else:
                         st.write("Failed to extract table  name from the following content:")
                         st.write(proc)
-
+                        
                 # 创建 ZIP 文件
                 zip_buffer = create_zip_file(temp_dir)
 
