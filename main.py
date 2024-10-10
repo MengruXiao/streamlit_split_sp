@@ -16,14 +16,15 @@ def extract_procedure_name(sql):
     return None
 
 
-def extract_view_name(sql):
-    """从 SQL 语句中提取视图的名称"""
-    match = re.search(r'CREATE OR REPLACE VIEW\s+(\w+\.\w+)\s*', sql, re.IGNORECASE)
+def extract_table_name(sql):
+    """从 SQL 语句中提取表的名称"""
+    match = re.search(r'CREATE TABLE IF NOT EXISTS\s+(\w+\.\w+)\s*', sql, re.IGNORECASE)
     if match:
         full_name = match.group(1)
-        _, view_name = full_name.split('.')
-        return view_name
+        _, table_name = full_name.split('.')
+        return table_name
     return None
+
 
 def process_file(content):
     """处理文件内容，按 CREATE OR REPLACE PROCEDURE 分割"""
@@ -43,20 +44,40 @@ def process_file(content):
 
 
 def process_file_view(content):
-    """处理文件内容，按 CREATE OR REPLACE VIEW 分割"""
-    # 按 "CREATE OR REPLACE VIEW " 分割文本
+    """处理文件内容，按 CREATE OR REPLACE PROCEDURE 分割"""
+    # 按 "CREATE OR REPLACE PROCEDURE " 分割文本
     parts = content.split('CREATE OR REPLACE VIEW ')
 
     # 去除空字符串
-    views = [part.strip() for part in parts if part.strip()]
+    procedures = [part.strip() for part in parts if part.strip()]
 
-    # 合并分割后的部分，确保每个视图的 SQL 语句是完整的
-    combined_views = []
-    for view in views:
-        if view:
-            combined_views.append(f'CREATE OR REPLACE VIEW {view}')
+    # 合并分割后的部分，确保每个存储过程的 SQL 语句是完整的
+    combined_procedures = []
+    for proc in procedures:
+        if proc:
+            combined_procedures.append(f'CREATE OR REPLACE VIEW {proc}')
 
-    return combined_views
+    return combined_procedures
+
+
+def process_file_table(content):
+    """处理文件内容，按 CREATE TABLE IF NOT EXISTS 分割"""
+    # 按 "CREATE TABLE IF NOT EXISTS " 分割文本
+    parts = content.split('CREATE TABLE IF NOT EXISTS ')
+
+    # 去除空字符串
+    tables = [part.strip() for part in parts if part.strip()]
+
+    # 合并分割后的部分，确保每个表的 SQL 语句是完整的
+    combined_tables = []
+    for table in tables:
+        if table:
+            combined_tables.append(f'CREATE TABLE IF NOT EXISTS {table}')
+
+    return combined_tables
+
+
+
 
 
 
@@ -81,7 +102,7 @@ def create_zip_file(temp_dir):
 st.title('分割sp或view小工具')
 
 # 选择功能
-function = st.selectbox('选择功能', ['SP分割', 'view分割'])
+function = st.selectbox('选择功能', ['SP分割', 'view分割','table分割'])
 
 # 允许用户上传一个 TXT 文件
 uploaded_file = st.file_uploader('上传一个包含多个存储过程的 TXT或SQL文件', type=['txt','sql'])
@@ -138,13 +159,44 @@ if st.button('处理并导出'):
 
                 # 生成命名规则为 sp名.sql 的文件
                 for proc in procedures:
-                    sp_name = extract_view_name(proc)
+                    sp_name = extract_procedure_name(proc)
                     if sp_name:
                         filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
                         st.write(f"Created file: {filename}")
                     else:
-                        st.write("Failed to extract view name from the following content:")
+                        st.write("Failed to extract procedure name from the following content:")
+                        st.write(proc)
+
+                # 创建 ZIP 文件
+                zip_buffer = create_zip_file(temp_dir)
+
+                # 提供下载链接
+                st.download_button(
+                    label="下载 ZIP 文件",
+                    data=zip_buffer,
+                    file_name="procedures.zip",
+                    mime="application/zip"
+                )
+
+        elif function == 'table分割':
+
+            # 处理文件内容
+            procedures = process_file_table(content)
+
+            # 创建一个临时目录来存储处理后的文件
+            with tempfile.TemporaryDirectory() as temp_dir_str:
+                temp_dir = Path(temp_dir_str)
+
+                # 生成命名规则为 sp名.sql 的文件
+                for proc in procedures:
+                    sp_name = extract_table_name(proc)
+                    if sp_name:
+                        filename = f"{schema}.{sp_name}.sql"
+                        create_temp_file(temp_dir, filename, proc)
+                        st.write(f"Created file: {filename}")
+                    else:
+                        st.write("Failed to extract table  name from the following content:")
                         st.write(proc)
 
                 # 创建 ZIP 文件
