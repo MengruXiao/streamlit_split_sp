@@ -197,12 +197,14 @@ if st.button('处理并导出'):
                         filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
                         filename_list.append(filename)
-                        df = pd.DataFrame(filename_list, columns=['table_list'])
-                        st.dataframe(df)
+
                         
                     else:
                         st.write("Failed to extract table  name from the following content:")
                         st.write(proc)
+                
+                df = pd.DataFrame(filename_list, columns=['table_list'])
+                st.dataframe(df)
                         
                 # 创建 ZIP 文件
                 zip_buffer = create_zip_file(temp_dir)
