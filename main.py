@@ -154,7 +154,7 @@ if st.button('处理并导出'):
                     mime="application/zip"
                 )
 
-                st.dataframe(df)
+                
                 
         elif function == 'view分割':
 
@@ -191,7 +191,7 @@ if st.button('处理并导出'):
                     mime="application/zip"
                 )
 
-                st.dataframe(df)
+               
 
         elif function == 'table分割':
 
@@ -230,7 +230,7 @@ if st.button('处理并导出'):
                     mime="application/zip"
                 )
 
-                st.dataframe(df)
+                
 
 
     else:
