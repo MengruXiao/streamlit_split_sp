@@ -129,15 +129,19 @@ if st.button('处理并导出'):
                 temp_dir = Path(temp_dir_str)
 
                 # 生成命名规则为 sp名.sql 的文件
+                filename_list=[]
                 for proc in procedures:
                     sp_name = extract_procedure_name(proc)
                     if sp_name:
                         filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
-                        st.write(f"Created file: {filename}")
+                        filename_list.append(filename)
                     else:
                         st.write("Failed to extract procedure name from the following content:")
                         st.write(proc)
+
+                df = pd.DataFrame(filename_list, columns=['sp_list'])
+                st.dataframe(df)
 
                 # 创建 ZIP 文件
                 zip_buffer = create_zip_file(temp_dir)
@@ -149,6 +153,9 @@ if st.button('处理并导出'):
                     file_name="procedures.zip",
                     mime="application/zip"
                 )
+
+                st.dataframe(df)
+                
         elif function == 'view分割':
 
             # 处理文件内容
@@ -159,15 +166,19 @@ if st.button('处理并导出'):
                 temp_dir = Path(temp_dir_str)
 
                 # 生成命名规则为 sp名.sql 的文件
+                filename_list=[]
                 for proc in procedures:
                     sp_name = extract_procedure_name(proc)
                     if sp_name:
                         filename = f"{schema}.{sp_name}.sql"
                         create_temp_file(temp_dir, filename, proc)
-                        st.write(f"Created file: {filename}")
+                        filename_list.append(filename)
                     else:
                         st.write("Failed to extract procedure name from the following content:")
                         st.write(proc)
+
+                df = pd.DataFrame(filename_list, columns=['view_list'])
+                st.dataframe(df)
 
                 # 创建 ZIP 文件
                 zip_buffer = create_zip_file(temp_dir)
@@ -179,6 +190,8 @@ if st.button('处理并导出'):
                     file_name="procedures.zip",
                     mime="application/zip"
                 )
+
+                st.dataframe(df)
 
         elif function == 'table分割':
 
@@ -217,7 +230,7 @@ if st.button('处理并导出'):
                     mime="application/zip"
                 )
 
-
+                st.dataframe(df)
 
 
     else:
