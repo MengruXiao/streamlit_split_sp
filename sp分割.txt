@@ -1,0 +1,354 @@
+CREATE OR REPLACE PROCEDURE enriched_sci.sp_scenario_3_test_script_part_1()
+	LANGUAGE plpgsql
+AS $$
+
+begin
+-- sales  monthly 新增 scenario 3 测试数据
+    INSERT INTO model_sci.sci_data_sales_monthly
+    (year, month, year_month, record_num, record_type, sales_date, p_seller_code, seller_code, p_buyer_code, buyer_code, raw_buyer_name, raw_product_name, raw_product_unit, file_version, p_product_code, product_code, product_specification, product_unit, batch_num, quantity, unit_price_with_vat, total_amount_with_vat, remark, ddi_or_manual, buyer_property, is_target_terminal, data_type, data_sub_type)
+    VALUES
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '1431', '上海交通大学医学院附属瑞金医院', '维立西呱片(唯可同)', '盒', '1', '89230403', '73', 'Xofigo', '2', 'BXJZJ01', '10', '132.3', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0'),
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '1431', '上海交通大学医学院附属瑞金医院', '维立西呱片(唯可同)', '盒', '1', '89230403', '73', 'Xofigo', '2', 'BXJZJ01', '10', '132.3', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0'),
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '1431', '上海交通大学医学院附属瑞金医院', '维立西呱片(唯可同)', '盒', '1', '89230403', '73', 'Xofigo', '2', 'BXJZJ01', '10', '132.3', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0'),
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '1431', '上海交通大学医学院附属瑞金医院', '维立西呱片(唯可同)', '盒', '1', '89230403', '73', 'Xofigo', '2', 'BXJZJ01', '10', '132.3', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0');
+
+-- CDP_SCI_137 特殊销量的多重价格测试
+    INSERT INTO model_sci.sci_data_sales_monthly
+    (year, month, year_month, record_num, record_type, sales_date, p_seller_code, seller_code, p_buyer_code, buyer_code, raw_buyer_name, raw_product_name, raw_product_unit, file_version, p_product_code, product_code, product_specification, product_unit, batch_num, quantity, unit_price_with_vat, total_amount_with_vat, remark, ddi_or_manual, buyer_property, is_target_terminal, data_type, data_sub_type)
+    VALUES
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '2405', '德州市中医院', 'Xarelto 2.5mg', '盒', '1', '89230403', '74', 'Xofigo', '2', 'BXJZJ01', '10', '32.3', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0'),
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '2405', '德州市中医院', 'Xarelto 2.5mg', '盒', '1', '89230403', '74', 'Xofigo', '2', 'BXJZJ01', '10', '32.4', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0'),
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '2405', '德州市中医院', 'Xarelto 2.5mg', '盒', '1', '89230403', '74', 'Xofigo', '2', 'BXJZJ01', '10', '32.5', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0'),
+    ('2024', '5', '202405', '268546', '21', NULL, 'BY100038', 'NULL', 'PH50005164', '2405', '德州市中医院', 'Xarelto 2.5mg', '盒', '1', '89230403', '74', 'Xofigo', '2', 'BXJZJ01', '10', '32.6', '10', 'NULL', '2', 'NULL', 'NULL', '1', '0');
+
+end;
+
+$$
+;
+
+CREATE OR REPLACE PROCEDURE enriched_sci.sp_scenario_3_test_script_part_2()
+	LANGUAGE plpgsql
+AS $$
+
+begin
+-- target 新增架构测试 数据
+    DELETE FROM model_sci.sci_data_territory_target
+    WHERE year_month BETWEEN 202405 AND 202406
+    AND product_code = 73
+    AND province_code = 310000
+    -- AND (client_code != 531450
+    -- AND vbp_version = 0
+    ;
+
+    INSERT INTO model_sci.sci_data_territory_target
+    (version_no, year, month, year_month, head_quarter_code, division_code, market_code, market_name, cluster_code, cluster_name, region_code, region_name, district_code, district_name, territory_code, territory_name, territory_type_name, cluster_head_code, cluster_head_name, rsm_code, rsm_name, dsm_code, dsm_name, mr_code, mr_name, mr_type, rsm_is_substitute, dsm_is_substitute, mr_is_substitute, client_code, client_name, client_type, channel_type_code, channel_type_name_cn, terminal_type_level3, medical_institution_level_name, pac_tag, province_code, province_name, city_code, city_name, is_child_terminal, final_client_code, final_client_name, chain_group_name, product_code, product_name_en, product_name_cn, brand_code, brand_name_cn, brand_name_en, evaluation_price, target_qty, target_amount, shared_terminal_percent, is_share_terminal, last_year_share_territory_split_rate, vbp_version, price_start_date, price_end_date, extend_field_1, extend_field_2, extend_field_3, extend_field_4, extend_field_5, extend_field_6, cluster_is_substitute, all_target_qty, county_code, county_name)
+    VALUES
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1431', '上海交通大学医学院附属瑞金医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1431', '上海交通大学医学院附属瑞金医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '2.078729', '61677.96816', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T10', 'GU-上海地区-T10', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10916196', '孙立宇', 'MR', false, false, false, '1434', '复旦大学附属中山医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1434', '复旦大学附属中山医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.999954', '29669.63513', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10911534', '林建彬', 'MR', false, false, false, '1436', '复旦大学附属肿瘤医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1436', '复旦大学附属肿瘤医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '16.044378', '476052.7396', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1456', '复旦大学附属华东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1456', '复旦大学附属华东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.078705', '2335.256055', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1483', '上海交通大学医学院附属新华医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1483', '上海交通大学医学院附属新华医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.078705', '2335.256055', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '4138', '海军军医大学第一附属医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '4138', '海军军医大学第一附属医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '3.143676', '93276.0106', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.019779', '586.862709', '0.34999646', true, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.036733', '1089.904843', '0.65000354', true, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '3.882422', '115195.3432', '0.34999998', true, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '7.210213', '213934.2299', '0.65000002', true, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10911534', '林建彬', 'MR', false, false, false, '555274', '上海市浦东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '555274', '上海市浦东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.97222', '28846.73962', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1431', '上海交通大学医学院附属瑞金医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1431', '上海交通大学医学院附属瑞金医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '4.736077', '140524.1407', '1', false, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T10', 'GU-上海地区-T10', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10916196', '孙立宇', 'MR', false, false, false, '1434', '复旦大学附属中山医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1434', '复旦大学附属中山医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '1.097511', '32564.24888', '1', false, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1436', '复旦大学附属肿瘤医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1436', '复旦大学附属肿瘤医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '17.609683', '522496.9043', '1', false, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1456', '复旦大学附属华东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1456', '复旦大学附属华东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.086383', '2563.069993', '1', false, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1483', '上海交通大学医学院附属新华医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1483', '上海交通大学医学院附属新华医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.086383', '2563.069993', '1', false, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T2', 'GU-上海地区-T2', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11329073', '巫焯栋', 'MR', false, false, false, '4138', '海军军医大学第一附属医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '4138', '海军军医大学第一附属医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.995831', '29547.3016', '1', false, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.021709', '644.127739', '0.34999839', true, NULL, '0', '2024-06-01 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),--需要过滤掉
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.040317', '1196.245707', '0.65000161', true, NULL, '0', '2024-06-01 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),--需要过滤掉
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '4.261195', '126433.9168', '0.35', true, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '7.913648', '234805.8498', '0.65', true, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '555274', '上海市浦东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '555274', '上海市浦东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '1.067071', '31661.06364', '1', false, NULL, '1', '2024-06-01 0:00', '2024-06-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    --
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1431', '上海交通大学医学院附属瑞金医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1431', '上海交通大学医学院附属瑞金医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '2.078729', '61677.96816', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T10', 'GU-上海地区-T10', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10916196', '孙立宇', 'MR', false, false, false, '1434', '复旦大学附属中山医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1434', '复旦大学附属中山医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.999954', '29669.63513', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10911534', '林建彬', 'MR', false, false, false, '1436', '复旦大学附属肿瘤医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1436', '复旦大学附属肿瘤医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '16.044378', '476052.7396', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1456', '复旦大学附属华东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1456', '复旦大学附属华东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.078705', '2335.256055', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1483', '上海交通大学医学院附属新华医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1483', '上海交通大学医学院附属新华医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.078705', '2335.256055', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '4138', '海军军医大学第一附属医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '4138', '海军军医大学第一附属医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '3.143676', '93276.0106', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.019779', '586.862709', '0.34999646', true, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.036733', '1089.904843', '0.65000354', true, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '3.882422', '115195.3432', '0.34999998', true, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '7.210213', '213934.2299', '0.65000002', true, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10911534', '林建彬', 'MR', false, false, false, '555274', '上海市浦东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '555274', '上海市浦东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.97222', '28846.73962', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1431', '上海交通大学医学院附属瑞金医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1431', '上海交通大学医学院附属瑞金医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '4.736077', '140524.1407', '1', false, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T10', 'GU-上海地区-T10', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '10916196', '孙立宇', 'MR', false, false, false, '1434', '复旦大学附属中山医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1434', '复旦大学附属中山医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '1.097511', '32564.24888', '1', false, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1436', '复旦大学附属肿瘤医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1436', '复旦大学附属肿瘤医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '17.609683', '522496.9043', '1', false, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1456', '复旦大学附属华东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1456', '复旦大学附属华东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.086383', '2563.069993', '1', false, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T3', 'GU-上海地区-T3', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '1483', '上海交通大学医学院附属新华医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '1483', '上海交通大学医学院附属新华医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.086383', '2563.069993', '1', false, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T2', 'GU-上海地区-T2', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11329073', '巫焯栋', 'MR', false, false, false, '4138', '海军军医大学第一附属医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '4138', '海军军医大学第一附属医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.995831', '29547.3016', '1', false, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    -- ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.021709', '644.127739', '0.34999839', true, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    -- ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531450', '上海交通大学医学院附属仁济医院（东院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531450', '上海交通大学医学院附属仁济医院（东院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '0.040317', '1196.245707', '0.65000161', true, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T7', 'GU-上海地区-T7', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11288164', '钱沈娇', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '4.261195', '126433.9168', '0.35', true, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T9', 'GU-上海地区-T9', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '11225766', '王世菁', 'MR', false, false, false, '531451', '上海交通大学医学院附属仁济医院（西院）', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '531451', '上海交通大学医学院附属仁济医院（西院）', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '7.913648', '234805.8498', '0.65', true, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '6', '202406', 'MTM', 'PH', '9', 'ONC', '905', 'ONC东区', '90501', 'ONC-沪皖大区', '9050106', 'GU-上海地区', '9050106-T8', 'GU-上海地区-T8', 'GU', '9246069', '何军', '7985484', '钱燕', '10669156', '谢宝敏', '990501', 'TBA', 'MR', false, false, false, '555274', '上海市浦东医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '310000', '上海市', '310000', '上海市', false, '555274', '上海市浦东医院', NULL, '73', 'Xofigo', '多菲戈', '58', '多菲戈', 'Xofigo', '29671', '1.067071', '31661.06364', '1', false, NULL, '2', '2024-06-21 0:00', '2024-06-30 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL);
+/*
+-- target 新增异常邮件部分测试数据
+    DELETE
+    FROM model_sci.sci_data_territory_target
+    WHERE market_code = 2
+    AND product_code = 87
+    AND final_client_code = 1435
+    AND client_code = 584888
+    AND month = 5
+    AND territory_code = '2140204-T1'
+    ;
+
+    INSERT INTO model_sci.sci_data_territory_target
+    (version_no, year, month, year_month, head_quarter_code, division_code, market_code, market_name, cluster_code, cluster_name, region_code, region_name, district_code, district_name, territory_code, territory_name, territory_type_name, cluster_head_code, cluster_head_name, rsm_code, rsm_name, dsm_code, dsm_name, mr_code, mr_name, mr_type, rsm_is_substitute, dsm_is_substitute, mr_is_substitute, client_code, client_name, client_type, channel_type_code, channel_type_name_cn, terminal_type_level3, medical_institution_level_name, pac_tag, province_code, province_name, city_code, city_name, is_child_terminal, final_client_code, final_client_name, chain_group_name, product_code, product_name_en, product_name_cn, brand_code, brand_name_cn, brand_name_en, evaluation_price, target_qty, target_amount, shared_terminal_percent, is_share_terminal, last_year_share_territory_split_rate, vbp_version, price_start_date, price_end_date, extend_field_1, extend_field_2, extend_field_3, extend_field_4, extend_field_5, extend_field_6, cluster_is_substitute, all_target_qty, county_code, county_name)
+    VALUES
+    ('20240801', '2024', '5', '202405', 'MTM', 'PH', '2', '南中国', '214', '南中国CV', '21402', 'CV-上海大区', '2140204', 'CV-上海4地区', '2140204-T1', 'CV-上海4地区-T1', 'CV', '6580413', '李莉', '7227555', '刘杨虎', '9429791', '刘丹', '10075329', '李 倩', NULL, NULL, NULL, NULL, '584888', '上海上药新特斜土大药房有限公司', '关联药店', 'DS', '药店', NULL, NULL, NULL, '310000', '上海市', '310000', '上海市', NULL, '1435', '复旦大学附属中山医院', NULL, '87', 'Verquvo 2.5mg*14', '唯可同 2.5mg*14', '61', '唯可同', 'Verquvo', '37.88', '0', '0', '0.33333333', NULL, NULL, '0', '2024-05-01 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+*/
+-- Sally 所需新增指标架构测试数据
+    DELETE
+    FROM model_sci.sci_data_territory_target
+    WHERE product_code = 86
+    AND province_code = 320000
+    AND year_month = 202405
+    -- AND vbp_version = 0
+    ;
+
+    INSERT INTO model_sci.sci_data_territory_target
+    (version_no, year, month, year_month, head_quarter_code, division_code, market_code, market_name, cluster_code, cluster_name, region_code, region_name, district_code, district_name, territory_code, territory_name, territory_type_name, cluster_head_code, cluster_head_name, rsm_code, rsm_name, dsm_code, dsm_name, mr_code, mr_name, mr_type, rsm_is_substitute, dsm_is_substitute, mr_is_substitute, client_code, client_name, client_type, channel_type_code, channel_type_name_cn, terminal_type_level3, medical_institution_level_name, pac_tag, province_code, province_name, city_code, city_name, is_child_terminal, final_client_code, final_client_name, chain_group_name, product_code, product_name_en, product_name_cn, brand_code, brand_name_cn, brand_name_en, evaluation_price, target_qty, target_amount, shared_terminal_percent, is_share_terminal, last_year_share_territory_split_rate, vbp_version, price_start_date, price_end_date, extend_field_1, extend_field_2, extend_field_3, extend_field_4, extend_field_5, extend_field_6, cluster_is_substitute, all_target_qty, county_code, county_name)
+    VALUES
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T1', 'ONC-维泰凯虚拟地区-T1', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1532', '江苏省肿瘤医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320100', '南京市', false, '1532', '江苏省肿瘤医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T2', 'ONC-维泰凯虚拟地区-T2', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '4007', '泰州市第三人民医院', '医院', 'HP', '医院', NULL, '二级乙等', NULL, '320000', '江苏省', '321200', '泰州市', false, '4007', '泰州市第三人民医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T2', 'ONC-维泰凯虚拟地区-T2', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1584', '徐州市中心医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320300', '徐州市', false, '1584', '徐州市中心医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '1', false, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T2', 'ONC-维泰凯虚拟地区-T2', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1558', '江南大学附属中心医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320200', '无锡市', false, '1558', '江南大学附属中心医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '0.5', true, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T1', 'ONC-维泰凯虚拟地区-T1', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1558', '江南大学附属中心医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320200', '无锡市', false, '1558', '江南大学附属中心医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '0.5', true, NULL, '1', '2024-05-01 0:00', '2024-05-20 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T1', 'ONC-维泰凯虚拟地区-T1', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1532', '江苏省肿瘤医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320100', '南京市', false, '1532', '江苏省肿瘤医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T2', 'ONC-维泰凯虚拟地区-T2', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '4007', '泰州市第三人民医院', '医院', 'HP', '医院', NULL, '二级乙等', NULL, '320000', '江苏省', '321200', '泰州市', false, '4007', '泰州市第三人民医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T2', 'ONC-维泰凯虚拟地区-T2', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1584', '徐州市中心医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320300', '徐州市', false, '1584', '徐州市中心医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '1', false, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T2', 'ONC-维泰凯虚拟地区-T2', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1558', '江南大学附属中心医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320200', '无锡市', false, '1558', '江南大学附属中心医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '0.5', true, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL),
+    ('20240901', '2024', '5', '202405', 'MTM', 'PH', '9', 'ONC', '909', 'ONC维泰凯', '90901', 'ONC-维泰凯虚拟大区', '9090101', 'ONC-维泰凯虚拟地区', '9090101-T1', 'ONC-维泰凯虚拟地区-T1', 'ONC', '5909', 'TBA', '790901', 'TBA', '890901', 'TBA', '990901', 'TBA', 'MR', false, false, false, '1558', '江南大学附属中心医院', '医院', 'HP', '医院', NULL, '三级甲等', NULL, '320000', '江苏省', '320200', '无锡市', false, '1558', '江南大学附属中心医院', NULL, '86', 'Vitrakvi 50ml', '维泰凯 50ml', '64', '维泰凯口服溶液', 'Vitrakvi OS', '18696.9', '0', '0', '0.5', true, NULL, '2', '2024-05-21 0:00', '2024-05-31 0:00', NULL, NULL, NULL, NULL, NULL, NULL, false, NULL, NULL, NULL);
+
+end;
+
+$$
+;
+
+CREATE OR REPLACE PROCEDURE enriched_sci.sp_staging_to_enriched()
+	LANGUAGE plpgsql
+AS $$
+
+BEGIN
+
+-- enriched_sci
+-- 倍通产品编码转化表
+-- call enriched_sci.sp_sci_data_product_mapping();
+
+-- enriched_pharmeyes
+-- 日流向数据
+call enriched_pharmeyes.sp_sci_data_sales_daily();
+-- 月流向数据
+call enriched_pharmeyes.sp_sci_data_sales_monthly();
+call enriched_pharmeyes.sp_sci_data_sales_monthly_for_sales_publish();
+-- 倍通合作伙伴
+call enriched_pharmeyes.sp_sci_data_partners();
+call enriched_pharmeyes.sp_sci_data_partners_for_sales_publish();
+-- 倍通去年全年流向
+call enriched_pharmeyes.sp_enriched_sci_data_mapped_sales_supplement();
+
+-- enriched_mttm
+-- 配置生效表
+call enriched_mttm.sp_sci_data_config_effective();
+-- 品牌内部mapping表
+call enriched_mttm.sp_sci_brand_internal_mapping();
+-- 指标版本选择配置表
+call enriched_mttm.sp_sci_data_version_config();
+-- 特药流向数据
+call enriched_mttm.sp_sci_data_special_drug();
+-- 关联关系信息
+call enriched_mttm.sp_sci_data_related_relationship();
+-- 倍通流向数据修正
+call enriched_mttm.sp_sci_data_pharmeyes_sales_fix();
+-- 产品信息
+call enriched_mttm.sp_sci_data_product();
+-- 终端信息
+call enriched_mttm.sp_sci_data_terminal();
+-- 指定产品/品牌限定区域补充架构
+call enriched_mttm.sp_sci_data_product_area_filter();
+-- 辖区指标
+call enriched_mttm.sp_sci_data_territory_target();
+-- 产品品牌信息
+call enriched_mttm.sp_sci_data_brand();
+-- 共坑但未定指标的产品Mapping
+call enriched_mttm.sp_sci_data_share_terminal_none_target_mapping();
+-- 产品价格
+call enriched_mttm.sp_sci_data_product_price();
+-- 共坑销量拆分配置表
+call enriched_mttm.sp_sci_data_product_target_ratio();
+-- 共坑拆分维度控制表
+call enriched_mttm.sp_sci_data_calculation_rule_control();
+-- 固定共坑占比拆分
+call enriched_mttm.sp_sci_data_share_terminal_fix_split_rate();
+-- DSM打分
+call enriched_mttm.sp_sci_data_dsm_score();
+-- 业绩认定打分窗口期信息
+call enriched_mttm.sp_sci_data_window_period();
+-- 业绩认定版本发布信号
+call enriched_mttm.sp_enriched_sci_pfe_publish_index();
+-- 计算进院产品次数配置表
+call enriched_mttm.sp_enriched_sci_purchase_state_product();
+-- 去年销量省份配置表
+call enriched_mttm.sp_enriched_sci_back_tracking_sales_province();
+-- 定制终端拆分
+call enriched_mttm.sp_enriched_sci_data_customer_terminal_split();
+-- 去年增量打分配置表
+call enriched_mttm.sp_enriched_sci_last_dsm_score_product_config();
+-- RPM列表
+call enriched_mttm.sp_enriched_sci_data_rpm_hierarchy();
+-- 去年业绩认证调量表
+--call enriched_mttm.sp_enriched_sci_data_transfer();
+--特殊打分配置表
+call enriched_mttm.sp_sci_data_vbp_score_config();
+--保量率配置表
+call enriched_mttm.sp_sci_gurantee_rate_product_config();
+--退货列表
+call enriched_mttm.sp_sci_data_goods_return();
+--特殊退货配置表
+call enriched_mttm.sp_sci_data_goods_return_vbp_config();
+--新产品退货退货配置表
+call enriched_mttm.sp_sci_data_goods_return_new_product_config();
+--新产品退货流向表
+call enriched_mttm.sp_sci_data_goods_return_new_product();
+--特殊退货流向表
+call enriched_mttm.sp_sci_data_goods_return_vbp();
+-- 模算
+call enriched_mttm.sp_sci_simulation_config();
+--清空staging表
+--call enriched_sci.sp_staging_truncate();
+
+--常规退货特殊扣还月配置表
+call enriched_mttm.sp_sci_data_goods_return_special_month_config();
+--新产品退货月份配置表
+call enriched_mttm.sp_sci_data_goods_return_new_product_month_config();
+
+-- Retail （去年全年辖区指标和NKA辖区指标通过辖区指标一起接入）
+-- enriched_pharmeyes
+-- 日流向数据
+call enriched_pharmeyes.sp_sci_data_sales_daily_retail();
+-- 月流向数据
+call enriched_pharmeyes.sp_sci_data_sales_monthly_retail();
+--业绩认定流向
+call enriched_pharmeyes.sp_sci_data_sales_monthly_for_sales_publish_retail();
+-- 倍通去年全年流向
+call enriched_pharmeyes.sp_enriched_sci_data_mapped_sales_supplement_retail();
+
+-- enriched_mttm
+-- 零售池子
+call enriched_mttm.sp_enriched_sci_data_terminal_merge();
+-- 上下游关系
+call enriched_mttm.sp_sci_data_store_parent();
+-- 月度版图
+call enriched_pharmeyes.sp_sci_data_layout_basic_main_data_month();
+-- 季度版图
+call enriched_pharmeyes.sp_sci_data_layout_basic_main_data_quarter();
+
+END;
+
+$$
+;
+
+CREATE OR REPLACE PROCEDURE enriched_sci.sp_staging_truncate()
+	LANGUAGE plpgsql
+AS $$
+
+
+
+--循环删除enriched层下三schema的staging表
+
+declare
+
+    rec RECORD;
+    cur1 cursor for select distinct schema_name,table_name from svv_all_tables where database_name = 'cn_sci_qa' and schema_name in ('enriched_sci','enriched_pharmeyes','enriched_mttm')  and table_name like 'staging_%' order by table_name;
+
+begin
+
+    open cur1;
+
+        loop
+            fetch cur1 into rec;
+            exit when not found;
+
+            execute 'delete from '||rec.schema_name||'.'||rec.table_name||'';
+
+        end loop;
+
+    truncate table model_sci.sci_pfe_publish_index_return;
+
+end;
+
+$$
+;
+
+CREATE OR REPLACE PROCEDURE enriched_sci.sp_staging_truncate_test()
+	LANGUAGE plpgsql
+AS $$
+
+
+
+--循环删除enriched层下三schema的staging表
+
+declare
+
+    rec RECORD;
+    cur1 cursor for select distinct schema_name,table_name from svv_all_tables where database_name = 'cn_sci_qa' and schema_name = 'enriched_sci'  and table_name like 'staging_%' order by table_name;
+
+begin
+
+    open cur1;
+
+        loop
+            fetch cur1 into rec;
+            exit when not found;
+
+            execute 'truncate table '||rec.schema_name||'.'||rec.table_name||'';
+
+        end loop;
+
+
+
+end;
+
+$$
+;
+
+CREATE OR REPLACE PROCEDURE enriched_sci.sp_staging_truncate_test1()
+	LANGUAGE plpgsql
+AS $$
+
+
+
+--循环删除enriched层下三schema的staging表
+
+declare
+
+    rec RECORD;
+    cur1 cursor for select distinct schema_name,table_name from svv_all_tables where database_name = 'cn_sci_qa' and schema_name in ('enriched_sci','enriched_pharmeyes','enriched_mttm')  and table_name like 'staging_%' order by table_name;
+
+begin
+
+    open cur1;
+
+        loop
+            fetch cur1 into rec;
+            exit when not found;
+
+            execute 'truncate table '||rec.schema_name||'.'||rec.table_name||'';
+
+        end loop;
+
+    truncate table model_sci.sci_pfe_publish_index_return;
+
+end;
+
+$$
+;

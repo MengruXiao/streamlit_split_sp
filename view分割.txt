@@ -1,0 +1,1424 @@
+CREATE OR REPLACE VIEW model_sci.v_sci_data_product_price_error_log AS
+SELECT year                AS "年"
+     , month               AS "月"
+     , client_code         AS "终端编码"
+     , final_client_code   AS "目标终端编码"
+     , product_code        AS "产品编码"
+     , CASE data_type
+           WHEN 1 THEN
+               '特药数据'
+           WHEN 2 THEN
+               '倍通流向修正数据'
+       END                 AS "销量来源类型"
+     , province_name       AS "省份"
+     , city_name           AS "城市"
+     , territory_type_name AS "辖区类型"
+     , market_name         AS "Market 名称"
+     , effective_date      AS "价格生效日期"
+     , expired_date        AS "价格失效日期"
+     , '实际价格'           AS "价格类型"
+     , price               AS "价格"
+     , CASE price_date_rank
+           WHEN 1 THEN
+               'Y'
+           ELSE
+               'N'
+       END                 AS "是否使用"
+FROM model_sci.sci_data_product_price_error_log
+WHERE log_sent_datetime IS NULL
+      AND insert_datetime::date >= DATEADD(day, -1, CURRENT_DATE) WITH NO SCHEMA Binding;
+CREATE OR REPLACE VIEW model_sci.v_sci_data_territory_target_all_log AS
+select
+    year as "年",
+    month as "月",
+    client_code as "终端编码",
+    brand_code as "品牌编码",
+    final_client_code as "目标终端编码" ,
+    source as "来源"
+from
+    model_sci.sci_data_territory_target_all_log
+where
+    report_sent_datetime is null with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_data_vbp_version_error_log AS
+SELECT year AS "年",
+       month AS "月",
+       client_code AS "终端编码",
+       final_client_code AS "目标终端编码",
+       product_code AS "产品编码",
+       CASE data_type
+           WHEN 1 THEN
+               '特药数据'
+           WHEN 2 THEN
+               '倍通流向修正数据'
+       END AS "销量来源类型 1",
+       territory_code AS "辖区编码",
+       vbp_version AS "vbp 版本"
+FROM model_sci.sci_data_vbp_version_error_log
+WHERE log_sent_datetime IS NULL
+      AND insert_datetime::date >= DATEADD(day, -1, CURRENT_DATE) WITH NO SCHEMA Binding;
+
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_city_product_price as
+select
+    distinct b.year,
+    b.month,
+    b.year_month,
+    a.market_code,
+    a.city_code,
+    a.product_code,
+    a.price_type:: varchar(200),
+    a.price,
+    a.monthly_flag
+from
+    (
+        select
+            distinct a.market_code,
+            a.city_code,
+            a.product_code,
+            a.price_type,
+            a.price,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag
+        from
+            model_sci.sci_data_product_price a
+        where
+            nvl(a.market_code, '') <> ''
+            and nvl(a.city_code, '') <> ''
+            and nvl(a.product_code, '') <> ''
+            and nvl(a.territory_type_name, '') = ''
+    ) a
+    left join (
+        select
+            distinct year_number as year,
+            month_number as month,
+            year_month_number as year_month,
+            full_date
+        from
+            model_sci.date_dimension
+    ) b on b.full_date between a.effective_date
+    and a.expired_date
+where
+    a.monthly_flag = 'true' with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_city_product_price_w_vbp
+AS
+SELECT year_month,
+       territory_code,
+       client_code,
+       final_client_code,
+       product_code,
+       city_code,
+       market_code,
+       vbp_version,
+       price_start_date,
+       price_end_date,
+       price_type,
+       effective_date,
+       expired_date,
+       monthly_flag,
+       price,
+       ROW_NUMBER() OVER (PARTITION BY year_month,
+                                       territory_code,
+                                       client_code,
+                                       final_client_code,
+                                       product_code,
+                                       city_code,
+                                       market_code,
+                                       price_type,
+                                       vbp_version
+                          ORDER BY max_price_date DESC
+                         ) AS price_date_rank,
+       COUNT(0) OVER (PARTITION BY year_month,
+                                   territory_code,
+                                   client_code,
+                                   final_client_code,
+                                   product_code,
+                                   city_code,
+                                   market_code,
+                                   price_type,
+                                   vbp_version
+                     ) AS price_count
+FROM
+(
+    SELECT t.year_month,
+           t.territory_code,
+           t.client_code,
+           t.final_client_code,
+           t.product_code,
+           t.city_code,
+           t.market_code,
+           t.vbp_version,
+           t.price_start_date,
+           t.price_end_date,
+           a.price_type,
+           a.effective_date,
+           a.expired_date,
+           a.monthly_flag,
+           a.price,
+           a.expired_date AS max_price_date
+    FROM model_sci.sci_data_product_price AS a
+        INNER JOIN model_sci.sci_data_entire_territory_target AS t
+            ON 1 = 1
+               AND a.year = t.year
+               AND a.month = t.month
+               AND a.product_code = t.product_code
+               AND a.city_code = t.city_code
+               AND a.market_code = t.market_code
+               AND a.effective_date
+               BETWEEN t.price_start_date AND t.price_end_date
+               AND a.expired_date
+               BETWEEN t.price_start_date AND t.price_end_date
+    WHERE 1 = 1
+          AND NVL(a.territory_type_name, '') = ''
+    GROUP BY t.year_month,
+             t.territory_code,
+             t.client_code,
+             t.final_client_code,
+             t.product_code,
+             t.city_code,
+             t.market_code,
+             t.vbp_version,
+             t.price_start_date,
+             t.price_end_date,
+             a.price_type,
+             a.effective_date,
+             a.expired_date,
+             a.monthly_flag,
+             a.price
+) a with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_city_product_price_w_vbp_retail AS
+SELECT
+    year_month,
+    territory_code,
+    client_code,
+    product_code,
+    city_code,
+    market_code,
+    vbp_version,
+    price_start_date,
+    price_end_date,
+    price_type,
+    effective_date,
+    expired_date,
+    monthly_flag,
+    price,
+    ROW_NUMBER() OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        city_code,
+        market_code,
+        price_type --vbp_version
+        ORDER BY
+            max_price_date DESC
+    ) AS price_date_rank,
+    COUNT(0) OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        city_code,
+        market_code,
+        price_type --vbp_version
+    ) AS price_count
+FROM
+    (
+        SELECT
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.city_code,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price,
+            a.expired_date AS max_price_date
+        FROM
+            model_sci.sci_data_product_price AS a
+            INNER JOIN (
+                select
+                    *
+                from
+                    model_sci.sci_data_territory_target
+                where
+                    market_code = 6
+            ) AS t ON 1 = 1
+            AND a.year = t.year
+            AND a.month = t.month
+            AND a.product_code = t.product_code
+            AND a.city_code = t.city_code
+            AND a.market_code = t.market_code
+            AND a.effective_date BETWEEN t.price_start_date
+            AND t.price_end_date
+            AND a.expired_date BETWEEN t.price_start_date
+            AND t.price_end_date
+        WHERE
+            1 = 1
+            AND NVL(a.territory_type_name, '') = ''
+        GROUP BY
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.city_code,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price
+    ) a with no schema binding;
+CREATE OR REPLACE VIEW model_sci.v_sci_market_city_territory_type_name_product_price as
+select
+    distinct b.year,
+    b.month,
+    b.year_month,
+    a.market_code,
+    a.city_code,
+    a.territory_type_name,
+    a.product_code,
+    a.price_type:: varchar(200),
+    a.price
+from
+    (
+        select
+            distinct a.market_code,
+            a.city_code,
+            a.territory_type_name,
+            a.product_code,
+            a.price_type,
+            a.price,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag
+        from
+            model_sci.sci_data_product_price a
+        where
+            nvl(a.market_code, '') <> ''
+            and nvl(a.city_code, '') <> ''
+            and nvl(a.territory_type_name, '') <> ''
+            and nvl(a.product_code, '') <> ''
+    ) a
+    left join (
+        select
+            distinct year_number as year,
+            month_number as month,
+            year_month_number as year_month,
+            full_date
+        from
+            model_sci.date_dimension
+    ) b on b.full_date between a.effective_date
+    and a.expired_date
+where
+    a.monthly_flag = 'true' with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_city_territory_type_name_product_price_w_vbp
+AS
+SELECT year_month,
+       territory_code,
+       client_code,
+       final_client_code,
+       product_code,
+       city_code,
+       territory_type_name,
+       market_code,
+       vbp_version,
+       price_start_date,
+       price_end_date,
+       price_type,
+       effective_date,
+       expired_date,
+       monthly_flag,
+       price,
+       ROW_NUMBER() OVER (PARTITION BY year_month,
+                                       territory_code,
+                                       client_code,
+                                       final_client_code,
+                                       product_code,
+                                       city_code,
+                                       territory_type_name,
+                                       market_code,
+                                       price_type,
+                                       vbp_version
+                          ORDER BY max_price_date DESC
+                         ) AS price_date_rank,
+       COUNT(0) OVER (PARTITION BY year_month,
+                                   territory_code,
+                                   client_code,
+                                   final_client_code,
+                                   product_code,
+                                   city_code,
+                                   territory_type_name,
+                                   market_code,
+                                   price_type,
+                                   vbp_version
+                     ) AS price_count
+FROM
+(
+    SELECT t.year_month,
+           t.territory_code,
+           t.client_code,
+           t.final_client_code,
+           t.product_code,
+           t.city_code,
+           t.territory_type_name,
+           t.market_code,
+           t.vbp_version,
+           t.price_start_date,
+           t.price_end_date,
+           a.price_type,
+           a.effective_date,
+           a.expired_date,
+           a.monthly_flag,
+           a.price,
+           a.expired_date AS max_price_date
+    FROM model_sci.sci_data_product_price AS a
+        INNER JOIN model_sci.sci_data_entire_territory_target AS t
+            ON 1 = 1
+               AND a.year = t.year
+               AND a.month = t.month
+               AND a.product_code = t.product_code
+               AND a.city_code = t.city_code
+               AND a.market_code = t.market_code
+               AND a.territory_type_name = t.territory_type_name
+               AND a.effective_date
+               BETWEEN t.price_start_date AND t.price_end_date
+               AND a.expired_date
+               BETWEEN t.price_start_date AND t.price_end_date
+    WHERE 1 = 1
+    GROUP BY t.year_month,
+             t.territory_code,
+             t.client_code,
+             t.final_client_code,
+             t.product_code,
+             t.city_code,
+             t.territory_type_name,
+             t.market_code,
+             t.vbp_version,
+             t.price_start_date,
+             t.price_end_date,
+             a.price_type,
+             a.effective_date,
+             a.expired_date,
+             a.monthly_flag,
+             a.price
+) a with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_city_territory_type_name_product_price_w_vbp_retail AS
+SELECT
+    year_month,
+    territory_code,
+    client_code,
+    product_code,
+    city_code,
+    territory_type_name,
+    market_code,
+    vbp_version,
+    price_start_date,
+    price_end_date,
+    price_type,
+    effective_date,
+    expired_date,
+    monthly_flag,
+    price,
+    ROW_NUMBER() OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        city_code,
+        territory_type_name,
+        market_code,
+        price_type --vbp_version
+        ORDER BY
+            max_price_date DESC
+    ) AS price_date_rank,
+    COUNT(0) OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        city_code,
+        territory_type_name,
+        market_code,
+        price_type --vbp_version
+    ) AS price_count
+FROM
+    (
+        SELECT
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.city_code,
+            t.territory_type_name,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price,
+            a.expired_date AS max_price_date
+        FROM
+            model_sci.sci_data_product_price AS a
+            INNER JOIN (
+                select
+                    *
+                from
+                    model_sci.sci_data_territory_target
+                where
+                    market_code = 6
+            ) AS t ON 1 = 1
+            AND a.year = t.year
+            AND a.month = t.month
+            AND a.product_code = t.product_code
+            AND a.city_code = t.city_code
+            AND a.market_code = t.market_code
+            AND a.territory_type_name = t.territory_type_name
+            AND a.effective_date BETWEEN t.price_start_date
+            AND t.price_end_date
+            AND a.expired_date BETWEEN t.price_start_date
+            AND t.price_end_date
+        WHERE
+            1 = 1
+        GROUP BY
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.city_code,
+            t.territory_type_name,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price
+    ) a with no schema binding;
+
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_product_price as
+select
+    distinct b.year,
+    b.month,
+    b.year_month,
+    a.market_code,
+    a.product_code,
+    a.price_type:: varchar(200),
+    a.price
+from
+    (
+        select
+            distinct a.market_code,
+            a.product_code,
+            a.price_type,
+            a.price,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag
+        from
+            model_sci.sci_data_product_price a
+        where
+            nvl(a.market_code, '') <> ''
+            and nvl(a.province_code, '') = ''
+            and nvl(a.product_code, '') <> ''
+            and nvl(a.territory_type_name, '') = ''
+            and nvl(a.city_code, '') = ''
+    ) a
+    left join (
+        select
+            distinct year_number as year,
+            month_number as month,
+            year_month_number as year_month,
+            full_date
+        from
+            model_sci.date_dimension
+    ) b on b.full_date between a.effective_date
+    and a.expired_date
+where
+    a.monthly_flag = 'true' with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_product_price_w_vbp
+AS
+SELECT year_month,
+       territory_code,
+       client_code,
+       final_client_code,
+       product_code,
+       market_code,
+       vbp_version,
+       price_start_date,
+       price_end_date,
+       price_type,
+       effective_date,
+       expired_date,
+       monthly_flag,
+       price,
+       ROW_NUMBER() OVER (PARTITION BY year_month,
+                                       territory_code,
+                                       client_code,
+                                       final_client_code,
+                                       product_code,
+                                       market_code,
+                                       price_type,
+                                       vbp_version
+                          ORDER BY max_price_date DESC
+                         ) AS price_date_rank,
+       COUNT(0) OVER (PARTITION BY year_month,
+                                   territory_code,
+                                   client_code,
+                                   final_client_code,
+                                   product_code,
+                                   market_code,
+                                   price_type,
+                                   vbp_version
+                     ) AS price_count
+FROM
+(
+    SELECT t.year_month,
+           t.territory_code,
+           t.client_code,
+           t.final_client_code,
+           t.product_code,
+           t.market_code,
+           t.vbp_version,
+           t.price_start_date,
+           t.price_end_date,
+           a.price_type,
+           a.effective_date,
+           a.expired_date,
+           a.monthly_flag,
+           a.price,
+           a.expired_date AS max_price_date
+    FROM model_sci.sci_data_product_price AS a
+        INNER JOIN model_sci.sci_data_entire_territory_target AS t
+            ON 1 = 1
+               AND a.year = t.year
+               AND a.month = t.month
+               AND a.product_code = t.product_code
+               AND a.market_code = t.market_code
+               AND a.effective_date
+               BETWEEN t.price_start_date AND t.price_end_date
+               AND a.expired_date
+               BETWEEN t.price_start_date AND t.price_end_date
+    WHERE 1 = 1
+          AND NVL(a.city_code, '') = ''
+          AND NVL(a.province_code, '') = ''
+          AND NVL(a.territory_type_name, '') = ''
+    GROUP BY t.year_month,
+             t.territory_code,
+             t.client_code,
+             t.final_client_code,
+             t.product_code,
+             t.market_code,
+             t.vbp_version,
+             t.price_start_date,
+             t.price_end_date,
+             a.price_type,
+             a.effective_date,
+             a.expired_date,
+             a.monthly_flag,
+             a.price
+) a with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_product_price_w_vbp_retail AS
+SELECT
+    year_month,
+    territory_code,
+    client_code,
+    product_code,
+    market_code,
+    vbp_version,
+    price_start_date,
+    price_end_date,
+    price_type,
+    effective_date,
+    expired_date,
+    monthly_flag,
+    price,
+    ROW_NUMBER() OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        market_code,
+        price_type --    vbp_version
+        ORDER BY
+            max_price_date DESC
+    ) AS price_date_rank,
+    COUNT(0) OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        market_code,
+        price_type --    vbp_version
+    ) AS price_count
+FROM
+    (
+        SELECT
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price,
+            a.expired_date AS max_price_date
+        FROM
+            model_sci.sci_data_product_price AS a
+            INNER JOIN (
+                select
+                    *
+                from
+                    model_sci.sci_data_territory_target
+                where
+                    market_code = 6
+            ) AS t ON 1 = 1
+            AND a.year = t.year
+            AND a.month = t.month
+            AND a.product_code = t.product_code
+            AND a.market_code = t.market_code
+            AND a.effective_date BETWEEN t.price_start_date
+            AND t.price_end_date
+            AND a.expired_date BETWEEN t.price_start_date
+            AND t.price_end_date
+        WHERE
+            1 = 1
+            AND NVL(a.city_code, '') = ''
+            AND NVL(a.province_code, '') = ''
+            AND NVL(a.territory_type_name, '') = ''
+        GROUP BY
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price
+    ) a with no schema binding;
+
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_province_product_price as
+select
+    distinct b.year,
+    b.month,
+    b.year_month,
+    a.market_code,
+    a.province_code,
+    a.product_code,
+    a.price_type,
+    a.price
+from
+    (
+        select
+            distinct a.market_code,
+            a.province_code,
+            a.product_code,
+            a.price_type,
+            a.price,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag
+        from
+            model_sci.sci_data_product_price a
+        where
+            nvl(a.market_code, '') <> ''
+            and nvl(a.province_code, '') <> ''
+            and nvl(a.product_code, '') <> ''
+            and nvl(a.territory_type_name, '') = ''
+            and nvl(a.city_code, '') = ''
+    ) a
+    left join (
+        select
+            distinct year_number as year,
+            month_number as month,
+            year_month_number as year_month,
+            full_date
+        from
+            model_sci.date_dimension
+    ) b on b.full_date between a.effective_date
+    and a.expired_date
+where
+    a.monthly_flag = 'true' with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_province_product_price_w_vbp
+AS
+SELECT year_month,
+       territory_code,
+       client_code,
+       final_client_code,
+       product_code,
+       province_code,
+       market_code,
+       vbp_version,
+       price_start_date,
+       price_end_date,
+       price_type,
+       effective_date,
+       expired_date,
+       monthly_flag,
+       price,
+       ROW_NUMBER() OVER (PARTITION BY year_month,
+                                       territory_code,
+                                       client_code,
+                                       final_client_code,
+                                       product_code,
+                                       province_code,
+                                       market_code,
+                                       price_type,
+                                       vbp_version
+                          ORDER BY max_price_date DESC
+                         ) AS price_date_rank,
+       COUNT(0) OVER (PARTITION BY year_month,
+                                   territory_code,
+                                   client_code,
+                                   final_client_code,
+                                   product_code,
+                                   province_code,
+                                   market_code,
+                                   price_type,
+                                   vbp_version
+                     ) AS price_count
+FROM
+(
+    SELECT t.year_month,
+           t.territory_code,
+           t.client_code,
+           t.final_client_code,
+           t.product_code,
+           t.province_code,
+           t.market_code,
+           t.vbp_version,
+           t.price_start_date,
+           t.price_end_date,
+           a.price_type,
+           a.effective_date,
+           a.expired_date,
+           a.monthly_flag,
+           a.price,
+           a.expired_date AS max_price_date
+    FROM model_sci.sci_data_product_price AS a
+        INNER JOIN model_sci.sci_data_entire_territory_target AS t
+            ON 1 = 1
+               AND a.year = t.year
+               AND a.month = t.month
+               AND a.product_code = t.product_code
+               AND a.market_code = t.market_code
+               AND a.province_code = t.province_code
+               AND a.effective_date
+               BETWEEN t.price_start_date AND t.price_end_date
+               AND a.expired_date
+               BETWEEN t.price_start_date AND t.price_end_date
+    WHERE 1 = 1
+          AND NVL(a.city_code, '') = ''
+          AND NVL(a.territory_type_name, '') = ''
+    GROUP BY t.year_month,
+             t.territory_code,
+             t.client_code,
+             t.final_client_code,
+             t.product_code,
+             t.province_code,
+             t.market_code,
+             t.vbp_version,
+             t.price_start_date,
+             t.price_end_date,
+             a.price_type,
+             a.effective_date,
+             a.expired_date,
+             a.monthly_flag,
+             a.price
+) a with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_province_product_price_w_vbp_retail AS
+SELECT
+    year_month,
+    territory_code,
+    client_code,
+    product_code,
+    province_code,
+    market_code,
+    vbp_version,
+    price_start_date,
+    price_end_date,
+    price_type,
+    effective_date,
+    expired_date,
+    monthly_flag,
+    price,
+    ROW_NUMBER() OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        province_code,
+        market_code,
+        price_type --vbp_version
+        ORDER BY
+            max_price_date DESC
+    ) AS price_date_rank,
+    COUNT(0) OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        province_code,
+        market_code,
+        price_type --vbp_version
+    ) AS price_count
+FROM
+    (
+        SELECT
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.province_code,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price,
+            a.expired_date AS max_price_date
+        FROM
+            model_sci.sci_data_product_price AS a
+            INNER JOIN (
+                select
+                    *
+                from
+                    model_sci.sci_data_territory_target
+                where
+                    market_code = 6
+            ) AS t ON 1 = 1
+            AND a.year = t.year
+            AND a.month = t.month
+            AND a.product_code = t.product_code
+            AND a.market_code = t.market_code
+            AND a.province_code = t.province_code
+            AND a.effective_date BETWEEN t.price_start_date
+            AND t.price_end_date
+            AND a.expired_date BETWEEN t.price_start_date
+            AND t.price_end_date
+        WHERE
+            1 = 1
+            AND NVL(a.city_code, '') = ''
+            AND NVL(a.territory_type_name, '') = ''
+        GROUP BY
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.province_code,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price
+    ) a with no schema binding;
+
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_province_territory_type_name_product_price as
+select
+    distinct b.year,
+    b.month,
+    b.year_month,
+    a.market_code,
+    a.province_code,
+    a.territory_type_name,
+    a.product_code,
+    a.price_type:: varchar(200),
+    a.price
+from
+    (
+        select
+            distinct a.market_code,
+            a.province_code,
+            a.territory_type_name,
+            a.product_code,
+            a.price_type,
+            a.price,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag
+        from
+            model_sci.sci_data_product_price a
+        where
+            nvl(a.market_code, '') <> ''
+            and nvl(a.province_code, '') <> ''
+            and nvl(a.territory_type_name, '') <> ''
+            and nvl(a.product_code, '') <> ''
+            and nvl(a.city_code, '') = ''
+    ) a
+    left join (
+        select
+            distinct year_number as year,
+            month_number as month,
+            year_month_number as year_month,
+            full_date
+        from
+            model_sci.date_dimension
+    ) b on b.full_date between a.effective_date
+    and a.expired_date
+where
+    a.monthly_flag = 'true' with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_province_territory_type_name_product_price_w_vbp
+AS
+SELECT year_month,
+       territory_code,
+       client_code,
+       final_client_code,
+       product_code,
+       province_code,
+       territory_type_name,
+       market_code,
+       vbp_version,
+       price_start_date,
+       price_end_date,
+       price_type,
+       effective_date,
+       expired_date,
+       monthly_flag,
+       price,
+       ROW_NUMBER() OVER (PARTITION BY year_month,
+                                       territory_code,
+                                       client_code,
+                                       final_client_code,
+                                       product_code,
+                                       province_code,
+                                       territory_type_name,
+                                       market_code,
+                                       price_type,
+                                       vbp_version
+                          ORDER BY max_price_date DESC
+                         ) AS price_date_rank,
+       COUNT(0) OVER (PARTITION BY year_month,
+                                   territory_code,
+                                   client_code,
+                                   final_client_code,
+                                   product_code,
+                                   province_code,
+                                   territory_type_name,
+                                   market_code,
+                                   price_type,
+                                   vbp_version
+                     ) AS price_count
+FROM
+(
+    SELECT t.year_month,
+           t.territory_code,
+           t.client_code,
+           t.final_client_code,
+           t.product_code,
+           t.province_code,
+           t.territory_type_name,
+           t.market_code,
+           t.vbp_version,
+           t.price_start_date,
+           t.price_end_date,
+           a.price_type,
+           a.effective_date,
+           a.expired_date,
+           a.monthly_flag,
+           a.price,
+           a.expired_date AS max_price_date
+    FROM model_sci.sci_data_product_price AS a
+        INNER JOIN model_sci.sci_data_entire_territory_target AS t
+            ON 1 = 1
+               AND a.year = t.year
+               AND a.month = t.month
+               AND a.product_code = t.product_code
+               AND a.market_code = t.market_code
+               AND a.province_code = t.province_code
+               AND a.territory_type_name = t.territory_type_name
+               AND a.effective_date
+               BETWEEN t.price_start_date AND t.price_end_date
+               AND a.expired_date
+               BETWEEN t.price_start_date AND t.price_end_date
+    WHERE 1 = 1
+          AND NVL(a.city_code, '') = ''
+    GROUP BY t.year_month,
+             t.territory_code,
+             t.client_code,
+             t.final_client_code,
+             t.product_code,
+             t.province_code,
+             t.territory_type_name,
+             t.market_code,
+             t.vbp_version,
+             t.price_start_date,
+             t.price_end_date,
+             a.price_type,
+             a.effective_date,
+             a.expired_date,
+             a.monthly_flag,
+             a.price
+) a with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_market_province_territory_type_name_product_price_w_vbp_retail AS
+SELECT
+    year_month,
+    territory_code,
+    client_code,
+    product_code,
+    province_code,
+    territory_type_name,
+    market_code,
+    vbp_version,
+    price_start_date,
+    price_end_date,
+    price_type,
+    effective_date,
+    expired_date,
+    monthly_flag,
+    price,
+    ROW_NUMBER() OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        province_code,
+        territory_type_name,
+        market_code,
+        price_type --vbp_version
+        ORDER BY
+            max_price_date DESC
+    ) AS price_date_rank,
+    COUNT(0) OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        province_code,
+        territory_type_name,
+        market_code,
+        price_type --vbp_version
+    ) AS price_count
+FROM
+    (
+        SELECT
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.province_code,
+            t.territory_type_name,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price,
+            a.expired_date AS max_price_date
+        FROM
+            model_sci.sci_data_product_price AS a
+            INNER JOIN (
+                select
+                    *
+                from
+                    model_sci.sci_data_territory_target
+                where
+                    market_code = 6
+            ) AS t ON 1 = 1
+            AND a.year = t.year
+            AND a.month = t.month
+            AND a.product_code = t.product_code
+            AND a.market_code = t.market_code
+            AND a.province_code = t.province_code
+            AND a.territory_type_name = t.territory_type_name
+            AND a.effective_date BETWEEN t.price_start_date
+            AND t.price_end_date
+            AND a.expired_date BETWEEN t.price_start_date
+            AND t.price_end_date
+        WHERE
+            1 = 1
+            AND NVL(a.city_code, '') = ''
+        GROUP BY
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.province_code,
+            t.territory_type_name,
+            t.market_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price
+    ) a with no schema binding;
+
+
+CREATE OR REPLACE VIEW model_sci.v_sci_product_price as
+select
+    distinct b.year,
+    b.month,
+    b.year_month,
+    a.product_code,
+    a.price_type,
+    a.price
+from
+    (
+        select
+            distinct a.product_code,
+            a.price_type,
+            a.price,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag
+        from
+            model_sci.sci_data_product_price a
+        where
+            nvl(a.market_code, '') = ''
+            and nvl(a.province_code, '') = ''
+            and nvl(a.product_code, '') <> ''
+            and nvl(a.territory_type_name, '') = ''
+            and nvl(a.city_code, '') = ''
+    ) a
+    left join (
+        select
+            distinct year_number as year,
+            month_number as month,
+            year_month_number as year_month,
+            full_date
+        from
+            model_sci.date_dimension
+    ) b on b.full_date between a.effective_date
+    and a.expired_date
+where
+    a.monthly_flag = 'true' with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_product_price_w_vbp
+AS
+SELECT year_month,
+       territory_code,
+       client_code,
+       final_client_code,
+       product_code,
+       vbp_version,
+       price_start_date,
+       price_end_date,
+       price_type,
+       effective_date,
+       expired_date,
+       monthly_flag,
+       price,
+       ROW_NUMBER() OVER (PARTITION BY year_month,
+                                       territory_code,
+                                       client_code,
+                                       final_client_code,
+                                       product_code,
+                                       price_type,
+                                       vbp_version
+                          ORDER BY max_price_date DESC
+                         ) AS price_date_rank,
+       COUNT(0) OVER (PARTITION BY year_month,
+                                   territory_code,
+                                   client_code,
+                                   final_client_code,
+                                   product_code,
+                                   price_type,
+                                   vbp_version
+                     ) AS price_count
+FROM
+(
+    SELECT t.year_month,
+           t.territory_code,
+           t.client_code,
+           t.final_client_code,
+           t.product_code,
+           t.vbp_version,
+           t.price_start_date,
+           t.price_end_date,
+           a.price_type,
+           a.effective_date,
+           a.expired_date,
+           a.monthly_flag,
+           a.price,
+           a.expired_date AS max_price_date
+    FROM model_sci.sci_data_product_price AS a
+        INNER JOIN model_sci.sci_data_entire_territory_target AS t
+            ON 1 = 1
+               AND a.year = t.year
+               AND a.month = t.month
+               AND a.product_code = t.product_code
+               AND a.effective_date
+               BETWEEN t.price_start_date AND t.price_end_date
+               AND a.expired_date
+               BETWEEN t.price_start_date AND t.price_end_date
+    WHERE 1 = 1
+          AND NVL(a.city_code, '') = ''
+          AND NVL(a.market_code, '') = ''
+          AND NVL(a.province_code, '') = ''
+          AND NVL(a.territory_type_name, '') = ''
+    GROUP BY t.year_month,
+             t.territory_code,
+             t.client_code,
+             t.final_client_code,
+             t.product_code,
+             t.vbp_version,
+             t.price_start_date,
+             t.price_end_date,
+             a.price_type,
+             a.effective_date,
+             a.expired_date,
+             a.monthly_flag,
+             a.price
+) a with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_product_price_w_vbp_retail AS
+SELECT
+    year_month,
+    territory_code,
+    client_code,
+    product_code,
+    vbp_version,
+    price_start_date,
+    price_end_date,
+    price_type,
+    effective_date,
+    expired_date,
+    monthly_flag,
+    price,
+    ROW_NUMBER() OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        price_type --vbp_version
+        ORDER BY
+            max_price_date DESC
+    ) AS price_date_rank,
+    COUNT(0) OVER (
+        PARTITION BY year_month,
+        territory_code,
+        client_code,
+        product_code,
+        price_type --vbp_version
+    ) AS price_count
+FROM
+    (
+        SELECT
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price,
+            a.expired_date AS max_price_date
+        FROM
+            model_sci.sci_data_product_price AS a
+            INNER JOIN (
+                select
+                    *
+                from
+                    model_sci.sci_data_territory_target
+                where
+                    market_code = 6
+            ) AS t ON 1 = 1
+            AND a.year = t.year
+            AND a.month = t.month
+            AND a.product_code = t.product_code
+            AND a.effective_date BETWEEN t.price_start_date
+            AND t.price_end_date
+            AND a.expired_date BETWEEN t.price_start_date
+            AND t.price_end_date
+        WHERE
+            1 = 1
+            AND NVL(a.city_code, '') = ''
+            AND NVL(a.market_code, '') = ''
+            AND NVL(a.province_code, '') = ''
+            AND NVL(a.territory_type_name, '') = ''
+        GROUP BY
+            t.year_month,
+            t.territory_code,
+            t.client_code,
+            t.product_code,
+            t.vbp_version,
+            t.price_start_date,
+            t.price_end_date,
+            a.price_type,
+            a.effective_date,
+            a.expired_date,
+            a.monthly_flag,
+            a.price
+    ) a with no schema binding;
+
+CREATE OR REPLACE VIEW model_sci.v_sci_target_product_amount_missing_log AS
+SELECT year AS "年",
+       month AS "月",
+       territory_code AS "辖区编码",
+       final_client_code AS "目标终端",
+       product_code AS "产品编码",
+       vbp_version AS "vbp版本",
+       brand_code AS "品牌编码",
+       CASE reason_code
+           WHEN 1 THEN
+               '本品牌无主剂型'
+           WHEN 2 THEN
+               '本品牌主剂型指标为0'
+       END AS "未取到本品牌主剂型指标原因",
+       CASE result_code
+           WHEN 1 THEN
+               '本品牌非主剂型'
+           WHEN 2 THEN
+               '跨品牌主剂型'
+           WHEN 3 THEN
+               '未取到指标'
+       END AS "指标source",
+       mapping_brand_code AS "指标mapping品牌编码",
+       mapping_product_code AS "指标mapping产品编码"
+FROM model_sci.sci_target_product_amount_missing_log
+WHERE log_sent_datetime IS NULL
+      AND insert_datetime::date >= DATEADD(day, -1, CURRENT_DATE) WITH NO Schema Binding;

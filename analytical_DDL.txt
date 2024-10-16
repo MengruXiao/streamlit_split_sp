@@ -1,0 +1,3835 @@
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_dsm_window_period_report
+(
+	uuid VARCHAR(256)   ENCODE lzo
+	,mttm_sales_score_code VARCHAR(333)   ENCODE lzo
+	,version_no VARCHAR(150)   ENCODE lzo
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,market_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(255)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(255)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount_this_year NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount_last_year NUMERIC(38,15)   ENCODE az64
+	,is_incremental_score BOOLEAN   ENCODE RAW
+	,calculation_rule VARCHAR(150)   ENCODE lzo
+	,share_terminal_count BIGINT   ENCODE az64
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,cluster_head_external_id VARCHAR(133)   ENCODE lzo
+	,rm_external_id VARCHAR(133)   ENCODE lzo
+	,dm_external_id VARCHAR(133)   ENCODE lzo
+	,mr_external_id VARCHAR(223)   ENCODE lzo
+	,insert_datetime TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,report_sent_datetime TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_goods_return_detail_export definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_goods_return_detail_export;
+
+--DROP TABLE analytical_sci.sci_data_goods_return_detail_export;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_goods_return_detail_export
+(
+	uuid VARCHAR(256)   ENCODE lzo
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,quarter SMALLINT   ENCODE az64
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,"cluster" VARCHAR(150)   ENCODE lzo
+	,region_code VARCHAR(60)   ENCODE lzo
+	,"region" VARCHAR(150)   ENCODE lzo
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district VARCHAR(150)   ENCODE lzo
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,ta_code VARCHAR(60)   ENCODE lzo
+	,ta_name VARCHAR(150)   ENCODE lzo
+	,rm_code VARCHAR(60)   ENCODE lzo
+	,rm_name VARCHAR(150)   ENCODE lzo
+	,dm_code VARCHAR(60)   ENCODE lzo
+	,dm_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,final_terminal_code VARCHAR(60)   ENCODE lzo
+	,final_terminal_name VARCHAR(600)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,product_name_cn VARCHAR(300)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,returned_goods_qty NUMERIC(38,15)   ENCODE az64
+	,returned_goods_value NUMERIC(38,15)   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_goods_return_new_product_daily definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_goods_return_new_product_daily;
+
+--DROP TABLE analytical_sci.sci_data_goods_return_new_product_daily;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_goods_return_new_product_daily
+(
+	goods_return_date DATE   ENCODE az64
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(720)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_goods_return_new_product_exception_monthly definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_goods_return_new_product_exception_monthly;
+
+--DROP TABLE analytical_sci.sci_data_goods_return_new_product_exception_monthly;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_goods_return_new_product_exception_monthly
+(
+	goods_return_date DATE   ENCODE az64
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+	,email_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_goods_return_new_product_monthly definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_goods_return_new_product_monthly;
+
+--DROP TABLE analytical_sci.sci_data_goods_return_new_product_monthly;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_goods_return_new_product_monthly
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(150)   ENCODE lzo
+	,client_province_code VARCHAR(60)   ENCODE lzo
+	,client_city_code VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,goods_return_quantity_total NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_goods_return_vbp definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_goods_return_vbp;
+
+--DROP TABLE analytical_sci.sci_data_goods_return_vbp;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_goods_return_vbp
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(60)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,cal_return_start_date VARCHAR(60)   ENCODE lzo
+	,cal_return_end_date VARCHAR(60)   ENCODE lzo
+	,avg_return_start_date VARCHAR(60)   ENCODE lzo
+	,avg_return_end_date VARCHAR(60)   ENCODE lzo
+	,prior_return_start_date VARCHAR(60)   ENCODE lzo
+	,prior_return_end_date VARCHAR(60)   ENCODE lzo
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+	,year_month INTEGER   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_goods_return_vbp_all definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_goods_return_vbp_all;
+
+--DROP TABLE analytical_sci.sci_data_goods_return_vbp_all;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_goods_return_vbp_all
+(
+	id INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,sales_date DATE   ENCODE az64
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,quantity NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_gurantee_rate definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_gurantee_rate;
+
+--DROP TABLE analytical_sci.sci_data_gurantee_rate;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_gurantee_rate
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_title VARCHAR(60)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,terminal_code VARCHAR(60)   ENCODE lzo
+	,termina_name VARCHAR(150)   ENCODE lzo
+	,terminal_type VARCHAR(60)   ENCODE lzo
+	,assessment_range VARCHAR(10)   ENCODE lzo
+	,assessment_month_sales_qty NUMERIC(38,15)   ENCODE az64
+	,traceability_period VARCHAR(60)   ENCODE lzo
+	,traceability_period_avg_sales_qty NUMERIC(38,15)   ENCODE az64
+	,guarantee_rate NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_in_market_sales definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_in_market_sales;
+
+--DROP TABLE analytical_sci.sci_data_in_market_sales;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_in_market_sales
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,record_num VARCHAR(150)   ENCODE lzo
+	,record_type VARCHAR(6)   ENCODE lzo
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,p_seller_code VARCHAR(150)   ENCODE lzo
+	,seller_code VARCHAR(150)   ENCODE lzo
+	,p_buyer_code VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,raw_buyer_name VARCHAR(720)   ENCODE lzo
+	,raw_product_name VARCHAR(720)   ENCODE lzo
+	,raw_product_unit VARCHAR(150)   ENCODE lzo
+	,file_version VARCHAR(360)   ENCODE lzo
+	,p_product_code VARCHAR(360)   ENCODE lzo
+	,product_code VARCHAR(360)   ENCODE lzo
+	,product_specification VARCHAR(360)   ENCODE lzo
+	,product_unit VARCHAR(150)   ENCODE lzo
+	,batch_num VARCHAR(360)   ENCODE lzo
+	,unit_price_with_vat VARCHAR(100)   ENCODE lzo
+	,total_amount_with_vat VARCHAR(100)   ENCODE lzo
+	,remark VARCHAR(720)   ENCODE lzo
+	,ddi_or_manual VARCHAR(100)   ENCODE lzo
+	,buyer_property VARCHAR(100)   ENCODE lzo
+	,is_target_terminal VARCHAR(100)   ENCODE lzo
+	,version_no VARCHAR(150)   ENCODE lzo
+	,quantity NUMERIC(38,15)   ENCODE az64
+	,data_type INTEGER   ENCODE az64
+	,data_sub_type VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_in_market_sales_sit_jeremy definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_in_market_sales_sit_jeremy;
+
+--DROP TABLE analytical_sci.sci_data_in_market_sales_sit_jeremy;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_in_market_sales_sit_jeremy
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,record_num VARCHAR(150)   ENCODE lzo
+	,record_type VARCHAR(6)   ENCODE lzo
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,p_seller_code VARCHAR(150)   ENCODE lzo
+	,seller_code VARCHAR(150)   ENCODE lzo
+	,p_buyer_code VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,raw_buyer_name VARCHAR(720)   ENCODE lzo
+	,raw_product_name VARCHAR(720)   ENCODE lzo
+	,raw_product_unit VARCHAR(150)   ENCODE lzo
+	,file_version VARCHAR(360)   ENCODE lzo
+	,p_product_code VARCHAR(360)   ENCODE lzo
+	,product_code VARCHAR(360)   ENCODE lzo
+	,product_specification VARCHAR(360)   ENCODE lzo
+	,product_unit VARCHAR(150)   ENCODE lzo
+	,batch_num VARCHAR(360)   ENCODE lzo
+	,unit_price_with_vat VARCHAR(100)   ENCODE lzo
+	,total_amount_with_vat VARCHAR(100)   ENCODE lzo
+	,remark VARCHAR(720)   ENCODE lzo
+	,ddi_or_manual VARCHAR(100)   ENCODE lzo
+	,buyer_property VARCHAR(100)   ENCODE lzo
+	,is_target_terminal VARCHAR(100)   ENCODE lzo
+	,version_no VARCHAR(150)   ENCODE lzo
+	,quantity NUMERIC(38,15)   ENCODE az64
+	,data_type INTEGER   ENCODE az64
+	,data_sub_type VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_territory_detail_level_target definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_territory_detail_level_target;
+
+--DROP TABLE analytical_sci.sci_data_territory_detail_level_target;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_territory_detail_level_target
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(300)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(300)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(300)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(300)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,dsm_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,hospital_level_code VARCHAR(150)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,version_no VARCHAR(150)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_territory_detail_w_fcc_level_sales definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_territory_detail_w_fcc_level_sales;
+
+--DROP TABLE analytical_sci.sci_data_territory_detail_w_fcc_level_sales;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_territory_detail_w_fcc_level_sales
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(300)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(300)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(300)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(300)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,sales_original_qty NUMERIC(38,15)   ENCODE az64
+	,sales_original_amount NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,dsm_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,hospital_level_code VARCHAR(150)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_data_territory_detail_w_sales_daily definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_daily;
+
+--DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_daily;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_territory_detail_w_sales_daily
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(300)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(300)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(300)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(300)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,sales_original_qty NUMERIC(38,15)   ENCODE az64
+	,sales_original_amount NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,dsm_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,hospital_level_code VARCHAR(150)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ SORTKEY (
+	final_client_code
+	)
+;
+
+
+
+-- analytical_sci.sci_data_territory_detail_w_sales_daily_n_monthly definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_daily_n_monthly;
+
+--DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_daily_n_monthly;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_territory_detail_w_sales_daily_n_monthly
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(300)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(300)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(300)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(300)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,sales_original_qty NUMERIC(38,15)   ENCODE az64
+	,sales_original_amount NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,dsm_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,hospital_level_code VARCHAR(150)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ SORTKEY (
+	final_client_code
+	)
+;
+
+
+
+-- analytical_sci.sci_data_territory_detail_w_sales_monthly definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_monthly;
+
+--DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_monthly;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_territory_detail_w_sales_monthly
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(300)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(300)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(300)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(300)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,sales_original_qty NUMERIC(38,15)   ENCODE az64
+	,sales_original_amount NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,dsm_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,hospital_level_code VARCHAR(150)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ SORTKEY (
+	final_client_code
+	)
+;
+
+
+
+-- analytical_sci.sci_data_territory_detail_w_sales_monthly_myteam definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_monthly_myteam;
+
+--DROP TABLE analytical_sci.sci_data_territory_detail_w_sales_monthly_myteam;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_data_territory_detail_w_sales_monthly_myteam
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(300)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(300)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(300)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(300)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,sales_original_qty NUMERIC(38,15)   ENCODE az64
+	,sales_original_amount NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,dsm_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,hospital_level_code VARCHAR(150)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ DISTKEY (client_code)
+;
+
+
+
+-- analytical_sci.sci_general_goods_return_monthly definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_general_goods_return_monthly;
+
+--DROP TABLE analytical_sci.sci_general_goods_return_monthly;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_general_goods_return_monthly
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(150)   ENCODE lzo
+	,client_province_code VARCHAR(60)   ENCODE lzo
+	,client_city_code VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_im_sales_publish_summary definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_im_sales_publish_summary;
+
+--DROP TABLE analytical_sci.sci_im_sales_publish_summary;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_im_sales_publish_summary
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,title VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,total_target_qty NUMERIC(38,15)   ENCODE az64
+	,total_target_amount NUMERIC(38,15)   ENCODE az64
+	,total_sales_qty NUMERIC(38,15)   ENCODE az64
+	,total_sales_amount NUMERIC(38,15)   ENCODE az64
+	,total_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,total_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,total_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,total_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_im_sales_publish_summary_sit_bk definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_im_sales_publish_summary_sit_bk;
+
+--DROP TABLE analytical_sci.sci_im_sales_publish_summary_sit_bk;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_im_sales_publish_summary_sit_bk
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,title VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,total_target_qty NUMERIC(38,15)   ENCODE az64
+	,total_target_amount NUMERIC(38,15)   ENCODE az64
+	,total_sales_qty NUMERIC(38,15)   ENCODE az64
+	,total_sales_amount NUMERIC(38,15)   ENCODE az64
+	,total_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,total_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,total_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,total_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,total_avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_ka_sales_publish definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_ka_sales_publish;
+
+--DROP TABLE analytical_sci.sci_ka_sales_publish;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_ka_sales_publish
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag INTEGER   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_refund_average_duration_for_prior definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_average_duration_for_prior;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_average_duration_for_prior;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_refund_average_duration_for_prior
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,standard_day INTEGER   ENCODE az64
+	,refund_day INTEGER   ENCODE az64
+	,total_refund_day INTEGER   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_day definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_day;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_day;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_day
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,standard_day INTEGER   ENCODE az64
+	,refund_day INTEGER   ENCODE az64
+	,total_refund_day INTEGER   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_month definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_month;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_month;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_month
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_refund_month INTEGER   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_prior definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_prior;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_prior;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_refund_duration_for_prior
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,vbp_negative_sales_for_average NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_result_for_day definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_result_for_day;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_result_for_day;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_result_for_day
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_result_for_month definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_result_for_month;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_result_for_month;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_result_for_month
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_result_for_prior definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_result_for_prior;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_result_for_prior;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_result_for_prior
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_day definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_day;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_day;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_day
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales_only NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_month definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_month;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_month;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_month
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales_only NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_prior definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_prior;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_prior;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_sales_amount_for_prior
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales_only NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_sales_for_day definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_for_day;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_for_day;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_sales_for_day
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales_only NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,cal_return_start_date DATE   ENCODE az64
+	,cal_return_end_date DATE   ENCODE az64
+	,avg_return_start_date DATE   ENCODE az64
+	,avg_return_end_date DATE   ENCODE az64
+	,prior_return_start_date DATE   ENCODE az64
+	,prior_return_end_date DATE   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_sales_for_month definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_for_month;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_for_month;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_sales_for_month
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,mapped_to_sfe_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales_only NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,cal_return_start_date DATE   ENCODE az64
+	,cal_return_end_date DATE   ENCODE az64
+	,avg_return_start_date DATE   ENCODE az64
+	,avg_return_end_date DATE   ENCODE az64
+	,prior_return_start_date DATE   ENCODE az64
+	,prior_return_end_date DATE   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_goods_return_vbp_sales_for_prior definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_for_prior;
+
+--DROP TABLE analytical_sci.sci_pef_data_goods_return_vbp_sales_for_prior;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_goods_return_vbp_sales_for_prior
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(10)   ENCODE lzo
+	,vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales NUMERIC(38,15)   ENCODE az64
+	,total_vbp_negative_sales_only NUMERIC(38,15)   ENCODE az64
+	,all_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,cal_return_start_date DATE   ENCODE az64
+	,cal_return_end_date DATE   ENCODE az64
+	,avg_return_start_date DATE   ENCODE az64
+	,avg_return_end_date DATE   ENCODE az64
+	,prior_return_start_date DATE   ENCODE az64
+	,prior_return_end_date DATE   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_gurantee_rate_assmonth definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_gurantee_rate_assmonth;
+
+--DROP TABLE analytical_sci.sci_pef_data_gurantee_rate_assmonth;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_gurantee_rate_assmonth
+(
+	year_month INTEGER   ENCODE az64
+	,division_code VARCHAR(60)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(60)   ENCODE lzo
+	,mr_name VARCHAR(150)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_title VARCHAR(60)   ENCODE lzo
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,terminal_code VARCHAR(60)   ENCODE lzo
+	,terminal_name VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(150)   ENCODE lzo
+	,terminal_type VARCHAR(50)   ENCODE lzo
+	,assessment_range VARCHAR(10)   ENCODE lzo
+	,assessment_month_sales_qty NUMERIC(38,15)   ENCODE az64
+	,traceability_period VARCHAR(50)   ENCODE lzo
+	,id VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_data_gurantee_rate_stracemonth definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_data_gurantee_rate_stracemonth;
+
+--DROP TABLE analytical_sci.sci_pef_data_gurantee_rate_stracemonth;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_data_gurantee_rate_stracemonth
+(
+	year_month INTEGER   ENCODE az64
+	,product_code VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,terminal_type VARCHAR(60)   ENCODE lzo
+	,assessment_range VARCHAR(10)   ENCODE lzo
+	,traceability_month_sales_qty NUMERIC(38,15)   ENCODE az64
+	,traceability_period VARCHAR(60)   ENCODE lzo
+	,traceability_month VARCHAR(60)   ENCODE lzo
+	,traceability_totalmonth INTEGER   ENCODE az64
+	,id VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_general_goods_return definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_general_goods_return;
+
+--DROP TABLE analytical_sci.sci_pef_general_goods_return;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_general_goods_return
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,client_code VARCHAR(60)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,sales_date DATE   ENCODE az64
+	,quantity NUMERIC(38,15)   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_general_goods_return_calculate_target definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_general_goods_return_calculate_target;
+
+--DROP TABLE analytical_sci.sci_pef_general_goods_return_calculate_target;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_general_goods_return_calculate_target
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,client_code VARCHAR(60)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,quarter VARCHAR(60)   ENCODE lzo
+	,rule_calculate VARCHAR(60)   ENCODE lzo
+	,mapped_to_sfe_code VARCHAR(60)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_gurantee_rate_product_config definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_gurantee_rate_product_config;
+
+--DROP TABLE analytical_sci.sci_pef_gurantee_rate_product_config;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_gurantee_rate_product_config
+(
+	id VARCHAR(60)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,assessment_month INTEGER   ENCODE az64
+	,client_type VARCHAR(60)   ENCODE lzo
+	,traceability_period VARCHAR(60)   ENCODE lzo
+	,assessment_range VARCHAR(10)   ENCODE lzo
+	,traceability_month INTEGER   ENCODE az64
+	,traceability_totalmonth INTEGER   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_in_market_sales definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_in_market_sales;
+
+--DROP TABLE analytical_sci.sci_pef_in_market_sales;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_in_market_sales
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,record_num VARCHAR(150)   ENCODE lzo
+	,record_type VARCHAR(6)   ENCODE lzo
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,p_seller_code VARCHAR(150)   ENCODE lzo
+	,seller_code VARCHAR(150)   ENCODE lzo
+	,p_buyer_code VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,raw_buyer_name VARCHAR(720)   ENCODE lzo
+	,raw_product_name VARCHAR(720)   ENCODE lzo
+	,raw_product_unit VARCHAR(150)   ENCODE lzo
+	,file_version VARCHAR(360)   ENCODE lzo
+	,p_product_code VARCHAR(360)   ENCODE lzo
+	,product_code VARCHAR(360)   ENCODE lzo
+	,product_specification VARCHAR(360)   ENCODE lzo
+	,product_unit VARCHAR(150)   ENCODE lzo
+	,batch_num VARCHAR(360)   ENCODE lzo
+	,unit_price_with_vat VARCHAR(100)   ENCODE lzo
+	,total_amount_with_vat VARCHAR(100)   ENCODE lzo
+	,remark VARCHAR(720)   ENCODE lzo
+	,ddi_or_manual VARCHAR(100)   ENCODE lzo
+	,buyer_property VARCHAR(100)   ENCODE lzo
+	,is_target_terminal VARCHAR(100)   ENCODE lzo
+	,version_no VARCHAR(150)   ENCODE lzo
+	,quantity NUMERIC(38,15)   ENCODE az64
+	,data_type INTEGER   ENCODE az64
+	,data_sub_type VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ SORTKEY (
+	record_num
+	)
+;
+
+
+
+-- analytical_sci.sci_pef_in_market_sales_sit definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_in_market_sales_sit;
+
+--DROP TABLE analytical_sci.sci_pef_in_market_sales_sit;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_in_market_sales_sit
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,client_code VARCHAR(65535)   ENCODE lzo
+	,product_code VARCHAR(65535)   ENCODE lzo
+	,quantity NUMERIC(38,15)   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_in_market_sales_tmp definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_in_market_sales_tmp;
+
+--DROP TABLE analytical_sci.sci_pef_in_market_sales_tmp;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_in_market_sales_tmp
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,year_month INTEGER   ENCODE az64
+	,record_num VARCHAR(150)   ENCODE lzo
+	,record_type VARCHAR(6)   ENCODE lzo
+	,sales_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,p_seller_code VARCHAR(150)   ENCODE lzo
+	,seller_code VARCHAR(150)   ENCODE bytedict
+	,p_buyer_code VARCHAR(150)   ENCODE lzo
+	,client_code VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,raw_buyer_name VARCHAR(720)   ENCODE lzo
+	,raw_product_name VARCHAR(720)   ENCODE lzo
+	,raw_product_unit VARCHAR(150)   ENCODE lzo
+	,file_version VARCHAR(360)   ENCODE lzo
+	,p_product_code VARCHAR(360)   ENCODE bytedict
+	,product_code VARCHAR(360)   ENCODE bytedict
+	,product_specification VARCHAR(360)   ENCODE lzo
+	,product_unit VARCHAR(150)   ENCODE lzo
+	,batch_num VARCHAR(360)   ENCODE lzo
+	,unit_price_with_vat VARCHAR(100)   ENCODE lzo
+	,total_amount_with_vat VARCHAR(100)   ENCODE lzo
+	,remark VARCHAR(720)   ENCODE lzo
+	,ddi_or_manual VARCHAR(100)   ENCODE lzo
+	,buyer_property VARCHAR(100)   ENCODE lzo
+	,is_target_terminal VARCHAR(100)   ENCODE lzo
+	,version_no VARCHAR(150)   ENCODE lzo
+	,quantity NUMERIC(38,15)   ENCODE az64
+	,data_type INTEGER   ENCODE az64
+	,data_sub_type VARCHAR(60)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_pef_new_goods_return_calculate_target definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_pef_new_goods_return_calculate_target;
+
+--DROP TABLE analytical_sci.sci_pef_new_goods_return_calculate_target;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_pef_new_goods_return_calculate_target
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,client_code VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,quarter VARCHAR(60)   ENCODE lzo
+	,totalmonth INTEGER   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_rpm_sales_publish definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_rpm_sales_publish;
+
+--DROP TABLE analytical_sci.sci_rpm_sales_publish;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_rpm_sales_publish
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,org_code VARCHAR(60)   ENCODE lzo
+	,org_name VARCHAR(150)   ENCODE lzo
+	,employee_id VARCHAR(60)   ENCODE lzo
+	,rpm_name VARCHAR(150)   ENCODE lzo
+	,issubstitute BOOLEAN   ENCODE RAW
+	,"level" VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,actual_qty NUMERIC(38,15)   ENCODE az64
+	,actual_amount NUMERIC(38,15)   ENCODE az64
+	,return_qty NUMERIC(38,15)   ENCODE az64
+	,return_amount NUMERIC(38,15)   ENCODE az64
+	,add_qty NUMERIC(38,15)   ENCODE az64
+	,add_amount NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+DROP TABLE analytical_sci.sci_rpm_sales_publish_report;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_rpm_sales_publish_report
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,flag int   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,org_code VARCHAR(60)   ENCODE lzo
+	,org_name VARCHAR(150)   ENCODE lzo
+	,employee_id VARCHAR(60)   ENCODE lzo
+	,rpm_name VARCHAR(150)   ENCODE lzo
+	,issubstitute BOOLEAN   ENCODE RAW
+	,"level" VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,actual_qty NUMERIC(38,15)   ENCODE az64
+	,actual_amount NUMERIC(38,15)   ENCODE az64
+	,return_qty NUMERIC(38,15)   ENCODE az64
+	,return_amount NUMERIC(38,15)   ENCODE az64
+	,add_qty NUMERIC(38,15)   ENCODE az64
+	,add_amount NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+
+-- analytical_sci.sci_rpm_sales_publish_bk_0618 definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_rpm_sales_publish_bk_0618;
+
+--DROP TABLE analytical_sci.sci_rpm_sales_publish_bk_0618;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_rpm_sales_publish_bk_0618
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE bytedict
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,org_code VARCHAR(60)   ENCODE lzo
+	,org_name VARCHAR(150)   ENCODE lzo
+	,employee_id VARCHAR(60)   ENCODE lzo
+	,rpm_name VARCHAR(150)   ENCODE lzo
+	,issubstitute BOOLEAN   ENCODE RAW
+	,"level" VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,ratio NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,actual_qty NUMERIC(38,15)   ENCODE az64
+	,actual_amount NUMERIC(38,15)   ENCODE az64
+	,return_qty NUMERIC(38,15)   ENCODE az64
+	,return_amount NUMERIC(38,15)   ENCODE az64
+	,add_qty NUMERIC(38,15)   ENCODE az64
+	,add_amount NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_rpm_sales_publish_version definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_rpm_sales_publish_version;
+
+--DROP TABLE analytical_sci.sci_rpm_sales_publish_version;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_rpm_sales_publish_version
+(
+	"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,version_no VARCHAR(150)   ENCODE lzo
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,org_code VARCHAR(60)   ENCODE lzo
+	,org_name VARCHAR(150)   ENCODE lzo
+	,employee_id VARCHAR(60)   ENCODE lzo
+	,rpm_name VARCHAR(150)   ENCODE lzo
+	,issubstitute BOOLEAN   ENCODE RAW
+	,"level" VARCHAR(60)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,ratio NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,actual_qty NUMERIC(38,15)   ENCODE az64
+	,actual_amount NUMERIC(38,15)   ENCODE az64
+	,return_qty NUMERIC(38,15)   ENCODE az64
+	,return_amount NUMERIC(38,15)   ENCODE az64
+	,add_qty NUMERIC(38,15)   ENCODE az64
+	,add_amount NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_avg_sales_amount NUMERIC(38,15)   ENCODE az64
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_calculation_log definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_calculation_log;
+
+--DROP TABLE analytical_sci.sci_sales_calculation_log;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_calculation_log
+(
+	mtm_salescalculationdate__c VARCHAR(34)   ENCODE lzo
+	,mtm_salesflowpublishdate__c VARCHAR(34)   ENCODE lzo
+	,mtm_salesflowlatestdate__c VARCHAR(34)   ENCODE lzo
+	,mtm_recordstatus__c VARCHAR(6)   ENCODE lzo
+	,insert_datetime TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_detail_monthly_region_export definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_detail_monthly_region_export;
+
+--DROP TABLE analytical_sci.sci_sales_detail_monthly_region_export;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_detail_monthly_region_export
+(
+	uuid VARCHAR(256)   ENCODE lzo
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,quarter SMALLINT   ENCODE az64
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,"cluster" VARCHAR(150)   ENCODE lzo
+	,region_code VARCHAR(60)   ENCODE lzo
+	,"region" VARCHAR(150)   ENCODE lzo
+	,district_code VARCHAR(60)   ENCODE lzo
+	,ta_code VARCHAR(60)   ENCODE lzo
+	,ta_name VARCHAR(150)   ENCODE lzo
+	,rm_code VARCHAR(60)   ENCODE lzo
+	,rm_name VARCHAR(150)   ENCODE lzo
+	,dm_code VARCHAR(60)   ENCODE lzo
+	,dm_name VARCHAR(150)   ENCODE lzo
+	,rm_is_substitute BOOLEAN   ENCODE RAW
+	,dm_is_substitute BOOLEAN   ENCODE RAW
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,product_name_cn VARCHAR(300)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,actual_value NUMERIC(38,15)   ENCODE az64
+	,target_value NUMERIC(38,15)   ENCODE az64
+	,yoy_actual_value NUMERIC(38,15)   ENCODE az64
+	,yoy_actual_value_avg NUMERIC(38,15)   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_detail_monthly_teminal_export definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_detail_monthly_teminal_export;
+
+--DROP TABLE analytical_sci.sci_sales_detail_monthly_teminal_export;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_detail_monthly_teminal_export
+(
+	uuid VARCHAR(256)   ENCODE lzo
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,quarter SMALLINT   ENCODE az64
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,"cluster" VARCHAR(150)   ENCODE lzo
+	,region_code VARCHAR(60)   ENCODE lzo
+	,"region" VARCHAR(150)   ENCODE lzo
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district VARCHAR(150)   ENCODE lzo
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,ta_code VARCHAR(60)   ENCODE lzo
+	,ta_name VARCHAR(150)   ENCODE lzo
+	,rm_code VARCHAR(60)   ENCODE lzo
+	,rm_name VARCHAR(150)   ENCODE lzo
+	,dm_code VARCHAR(60)   ENCODE lzo
+	,dm_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,rm_is_substitute BOOLEAN   ENCODE RAW
+	,dm_is_substitute BOOLEAN   ENCODE RAW
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,final_terminal_code VARCHAR(60)   ENCODE lzo
+	,final_terminal_name VARCHAR(600)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,product_name_cn VARCHAR(300)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,actual_value NUMERIC(38,15)   ENCODE az64
+	,target_value NUMERIC(38,15)   ENCODE az64
+	,yoy_actual_value NUMERIC(38,15)   ENCODE az64
+	,yoy_actual_value_avg NUMERIC(38,15)   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_detail_monthly_territory_export definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_detail_monthly_territory_export;
+
+--DROP TABLE analytical_sci.sci_sales_detail_monthly_territory_export;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_detail_monthly_territory_export
+(
+	uuid VARCHAR(256)   ENCODE lzo
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,quarter SMALLINT   ENCODE az64
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,"cluster" VARCHAR(150)   ENCODE lzo
+	,region_code VARCHAR(60)   ENCODE lzo
+	,"region" VARCHAR(150)   ENCODE lzo
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district VARCHAR(150)   ENCODE lzo
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,ta_code VARCHAR(60)   ENCODE lzo
+	,ta_name VARCHAR(150)   ENCODE lzo
+	,rm_code VARCHAR(60)   ENCODE lzo
+	,rm_name VARCHAR(150)   ENCODE lzo
+	,dm_code VARCHAR(60)   ENCODE lzo
+	,dm_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,rm_is_substitute BOOLEAN   ENCODE RAW
+	,dm_is_substitute BOOLEAN   ENCODE RAW
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(300)   ENCODE lzo
+	,product_name_cn VARCHAR(300)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(150)   ENCODE lzo
+	,brand_name_cn VARCHAR(150)   ENCODE lzo
+	,actual_value NUMERIC(38,15)   ENCODE az64
+	,target_value NUMERIC(38,15)   ENCODE az64
+	,yoy_actual_value NUMERIC(38,15)   ENCODE az64
+	,yoy_actual_value_avg NUMERIC(38,15)   ENCODE az64
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_publish definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish;
+
+--DROP TABLE analytical_sci.sci_sales_publish;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag INTEGER   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,purchase_count_result NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_publish_after_transfer definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_after_transfer;
+
+--DROP TABLE analytical_sci.sci_sales_publish_after_transfer;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_after_transfer
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,purchase_count_result NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ DISTKEY (client_code)
+;
+
+
+
+-- analytical_sci.sci_sales_publish_after_transfer_xinyu_bk definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_after_transfer_xinyu_bk;
+
+--DROP TABLE analytical_sci.sci_sales_publish_after_transfer_xinyu_bk;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_after_transfer_xinyu_bk
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE bytedict
+	,market_name VARCHAR(150)   ENCODE bytedict
+	,cluster_code VARCHAR(60)   ENCODE bytedict
+	,cluster_name VARCHAR(150)   ENCODE bytedict
+	,cluster_head_code VARCHAR(60)   ENCODE bytedict
+	,cluster_head_name VARCHAR(150)   ENCODE bytedict
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE bytedict
+	,region_name VARCHAR(150)   ENCODE bytedict
+	,rsm_code VARCHAR(60)   ENCODE bytedict
+	,rsm_name VARCHAR(150)   ENCODE bytedict
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE bytedict
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE bytedict
+	,province_name VARCHAR(150)   ENCODE bytedict
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE bytedict
+	,brand_code VARCHAR(60)   ENCODE bytedict
+	,brand_name VARCHAR(150)   ENCODE bytedict
+	,product_code VARCHAR(60)   ENCODE bytedict
+	,product_name VARCHAR(150)   ENCODE bytedict
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag BOOLEAN   ENCODE RAW
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,purchase_count_result NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_publish_bk definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_bk;
+
+--DROP TABLE analytical_sci.sci_sales_publish_bk;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_bk
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE bytedict
+	,cluster_head_code VARCHAR(60)   ENCODE bytedict
+	,cluster_head_name VARCHAR(150)   ENCODE bytedict
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE bytedict
+	,region_name VARCHAR(150)   ENCODE bytedict
+	,rsm_code VARCHAR(60)   ENCODE bytedict
+	,rsm_name VARCHAR(150)   ENCODE bytedict
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE bytedict
+	,province_name VARCHAR(150)   ENCODE bytedict
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE bytedict
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE bytedict
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag INTEGER   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,purchase_count_result NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_publish_newstruct definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_newstruct;
+
+--DROP TABLE analytical_sci.sci_sales_publish_newstruct;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_newstruct
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division_code VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,supplement_flag INTEGER   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,last_evaluation_price NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,medical_institution_level_name VARCHAR(150)   ENCODE lzo
+	,medical_institution_level_code VARCHAR(60)   ENCODE lzo
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ DISTKEY (client_code)
+ SORTKEY (
+	client_code
+	)
+;
+
+
+
+-- analytical_sci.sci_sales_publish_newstruct_test_round definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_newstruct_test_round;
+
+--DROP TABLE analytical_sci.sci_sales_publish_newstruct_test_round;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_newstruct_test_round
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division_code VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,supplement_flag INTEGER   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,last_evaluation_price NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,medical_institution_level_name VARCHAR(150)   ENCODE lzo
+	,medical_institution_level_code VARCHAR(60)   ENCODE lzo
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ SORTKEY (
+	client_code
+	)
+;
+
+
+
+-- analytical_sci.sci_sales_publish_newstruct_tmp definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_newstruct_tmp;
+
+--DROP TABLE analytical_sci.sci_sales_publish_newstruct_tmp;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_newstruct_tmp
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division_code VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name_en VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name_en VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,supplement_flag INTEGER   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,last_evaluation_price NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,medical_institution_level_name VARCHAR(150)   ENCODE lzo
+	,medical_institution_level_code VARCHAR(60)   ENCODE lzo
+	,last_year_share_territory_split_rate NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_publish_report definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_report;
+
+--DROP TABLE analytical_sci.sci_sales_publish_report;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_report
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,version_flag INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag INTEGER   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,purchase_count_result NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
+
+
+
+-- analytical_sci.sci_sales_publish_report_log_export definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_report_log_export;
+
+--DROP TABLE analytical_sci.sci_sales_publish_report_log_export;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_report_log_export
+(
+	id INTEGER  DEFAULT "identity"(2344855, 0, '1,1'::text) ENCODE RAW
+	,createddate TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,updateddate TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,jobdate DATE   ENCODE az64
+	,origin VARCHAR(60)   ENCODE lzo
+	,startyear VARCHAR(60)   ENCODE lzo
+	,endyear VARCHAR(60)   ENCODE lzo
+	,tabletype VARCHAR(60)   ENCODE lzo
+	,status VARCHAR(60)   ENCODE lzo
+)
+DISTSTYLE KEY
+ DISTKEY (id)
+ SORTKEY (
+	id
+	)
+;
+
+
+
+-- analytical_sci.sci_sales_publish_sit_jeremy definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_sit_jeremy;
+
+--DROP TABLE analytical_sci.sci_sales_publish_sit_jeremy;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_sit_jeremy
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag INTEGER   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,purchase_count_result NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+ DISTKEY (final_client_code)
+ SORTKEY (
+	market_code
+	)
+;
+
+
+
+-- analytical_sci.sci_sales_publish_version definition
+
+-- Drop table
+
+-- DROP TABLE analytical_sci.sci_sales_publish_version;
+
+--DROP TABLE analytical_sci.sci_sales_publish_version;
+CREATE TABLE IF NOT EXISTS analytical_sci.sci_sales_publish_version
+(
+	year_month INTEGER   ENCODE az64
+	,"year" INTEGER   ENCODE az64
+	,"month" INTEGER   ENCODE az64
+	,version_no VARCHAR(150)   ENCODE lzo
+	,division VARCHAR(150)   ENCODE lzo
+	,market_code VARCHAR(60)   ENCODE lzo
+	,market_name VARCHAR(150)   ENCODE lzo
+	,cluster_code VARCHAR(60)   ENCODE lzo
+	,cluster_name VARCHAR(150)   ENCODE lzo
+	,cluster_head_code VARCHAR(60)   ENCODE lzo
+	,cluster_head_name VARCHAR(150)   ENCODE lzo
+	,cluster_is_substitute BOOLEAN   ENCODE RAW
+	,region_code VARCHAR(60)   ENCODE lzo
+	,region_name VARCHAR(150)   ENCODE lzo
+	,rsm_code VARCHAR(60)   ENCODE lzo
+	,rsm_name VARCHAR(150)   ENCODE lzo
+	,rsm_is_substitute BOOLEAN   ENCODE RAW
+	,district_code VARCHAR(60)   ENCODE lzo
+	,district_name VARCHAR(150)   ENCODE lzo
+	,dsm_code VARCHAR(60)   ENCODE lzo
+	,dsm_name VARCHAR(150)   ENCODE lzo
+	,dsm_is_substitute BOOLEAN   ENCODE RAW
+	,territory_code VARCHAR(60)   ENCODE lzo
+	,territory_name VARCHAR(150)   ENCODE lzo
+	,territory_type_name VARCHAR(150)   ENCODE lzo
+	,mr_code VARCHAR(150)   ENCODE lzo
+	,mr_name VARCHAR(60)   ENCODE lzo
+	,mr_is_substitute BOOLEAN   ENCODE RAW
+	,mr_type VARCHAR(60)   ENCODE lzo
+	,client_code VARCHAR(60)   ENCODE lzo
+	,client_name VARCHAR(600)   ENCODE lzo
+	,client_type VARCHAR(150)   ENCODE lzo
+	,final_client_code VARCHAR(60)   ENCODE lzo
+	,final_client_name VARCHAR(600)   ENCODE lzo
+	,province_code VARCHAR(60)   ENCODE lzo
+	,province_name VARCHAR(150)   ENCODE lzo
+	,city_code VARCHAR(60)   ENCODE lzo
+	,city_name VARCHAR(150)   ENCODE lzo
+	,county_code VARCHAR(60)   ENCODE lzo
+	,county_name VARCHAR(150)   ENCODE lzo
+	,hospital_level_code VARCHAR(60)   ENCODE lzo
+	,hospital_level_name VARCHAR(150)   ENCODE lzo
+	,product_line_name VARCHAR(150)   ENCODE lzo
+	,brand_code VARCHAR(60)   ENCODE lzo
+	,brand_name VARCHAR(150)   ENCODE lzo
+	,product_code VARCHAR(60)   ENCODE lzo
+	,product_name VARCHAR(150)   ENCODE lzo
+	,vbp_version VARCHAR(60)   ENCODE lzo
+	,price_start_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,price_end_date TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,is_supplement BOOLEAN   ENCODE RAW
+	,supplement_flag INTEGER   ENCODE az64
+	,is_share_terminal BOOLEAN   ENCODE RAW
+	,target_split_ratio NUMERIC(38,15)   ENCODE az64
+	,behave_split_ratio NUMERIC(38,15)   ENCODE az64
+	,is_split_fixed BOOLEAN   ENCODE RAW
+	,fixed_final_split_rate NUMERIC(38,15)   ENCODE az64
+	,target_split_rate NUMERIC(38,15)   ENCODE az64
+	,final_split_rate NUMERIC(38,15)   ENCODE az64
+	,evaluation_price NUMERIC(38,15)   ENCODE az64
+	,actual_price NUMERIC(38,15)   ENCODE az64
+	,purchase_count_result NUMERIC(38,15)   ENCODE az64
+	,target_qty NUMERIC(38,15)   ENCODE az64
+	,target_amount NUMERIC(38,15)   ENCODE az64
+	,all_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_target_amount NUMERIC(38,15)   ENCODE az64
+	,sales_qty NUMERIC(38,15)   ENCODE az64
+	,sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_split_rate NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_target_amount NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_qty NUMERIC(38,15)   ENCODE az64
+	,avg_all_last_sales_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_target_amount NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_qty NUMERIC(38,15)   ENCODE az64
+	,all_last_yearly_sales_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_add_vbp NUMERIC(38,15)   ENCODE az64
+	,goods_return_quantity_new_prod NUMERIC(38,15)   ENCODE az64
+	,goods_return_amount_new_prod NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_quantity_add NUMERIC(38,15)   ENCODE az64
+	,total_goods_return_amount_add NUMERIC(38,15)   ENCODE az64
+	,final_sales_qty NUMERIC(38,15)   ENCODE az64
+	,final_sales_amount NUMERIC(38,15)   ENCODE az64
+	,extend_field_1 VARCHAR(65535)   ENCODE lzo
+	,extend_field_2 VARCHAR(65535)   ENCODE lzo
+	,extend_field_3 VARCHAR(65535)   ENCODE lzo
+	,extend_field_4 VARCHAR(65535)   ENCODE lzo
+	,extend_field_5 VARCHAR(65535)   ENCODE lzo
+	,extend_field_6 VARCHAR(65535)   ENCODE lzo
+	,insert_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,insert_user VARCHAR(100)   ENCODE lzo
+	,update_dt TIMESTAMP WITHOUT TIME ZONE   ENCODE az64
+	,update_user VARCHAR(100)   ENCODE lzo
+)
+DISTSTYLE AUTO
+;
